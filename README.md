@@ -149,8 +149,7 @@ Gadirpull is a production-grade, versatile file synchronization and continuous d
  
  `-b <branches>`  Comma-separated branches 
  
- `-host <addr>`  Dashboard listen address 
- 
+ `-host <addr>`  Dashboard listen address
  `-port <port>`  Dashboard listen port 
  
 ### File Operations
