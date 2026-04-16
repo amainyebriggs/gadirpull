@@ -105,52 +105,30 @@ Gadirpull is a production-grade, versatile file synchronization and continuous d
 
  Command  Description 
 ----------------------
- `-r <URL>`  Add repository 
- 
- `-delete -r <URL>`  Delete repository 
- 
- `-list`  List all tracked repositories 
- 
- `-find <URL>`  Find repository location 
- 
- `-d`  Start daemon with dashboard 
- 
- `-service`  Create/remove systemd daemon service 
- 
- `-auth <type>`  Authentication type (none/token/password/ssh) 
- 
- `-token <value>`  Token or password 
- 
- `-user <username>`  Username for HTTPS auth 
- 
- `-sshkey <path>`  SSH private key path 
- 
- `-buildcmd <cmd>`  Build command after sync 
- 
- `-startcmd <cmd>`  Service start command 
- 
- `-s`  Create systemd service for repository 
- 
- `-allowedcmd <cmds>`  Comma-separated command whitelist 
- 
- `-envencrypt <files>`  Encrypt files with systemd-creds 
- 
- `-envunencrypt`  Remove encrypted credentials 
- 
- `-createfile text\file`  Create file in repository 
- 
- `-filename <name>`  Destination filename 
- 
- `-text "<content>"`  Inline content for text mode 
- 
- `-file <path>`  Source file for file mode 
- 
- `-c <seconds>`  Pull interval (default 60) 
- 
- `-b <branches>`  Comma-separated branches 
- 
- `-host <addr>`  Dashboard listen address
- `-port <port>`  Dashboard listen port 
+ **`-r <URL>`  Add repository**
+ **`-delete -r <URL>`  Delete repository**
+ **`-list`  List all tracked repositories**
+ **`-find <URL>`  Find repository location**
+ **`-d`  Start daemon with dashboard**
+ **`-service`  Create/remove systemd daemon service**
+ **`-auth <type>`  Authentication type (none/token/password/ssh)** 
+ **`-token <value>`  Token or password**
+ **`-user <username>`  Username for HTTPS auth** 
+ **`-sshkey <path>`  SSH private key path**
+ **`-buildcmd <cmd>`  Build command after sync** 
+ **`-startcmd <cmd>`  Service start command**
+ **`-s`  Create systemd service for repository** 
+ **`-allowedcmd <cmds>`  Comma-separated command whitelist** 
+ **`-envencrypt <files>`  Encrypt files with systemd-creds**
+ **`-envunencrypt`  Remove encrypted credentials**
+ **`-createfile text\file`  Create file in repository** 
+ **`-filename <name>`  Destination filename**
+ **`-text "<content>"`  Inline content for text mode** 
+ **`-file <path>`  Source file for file mode**
+ **`-c <seconds>`  Pull interval (default 60)**
+ **`-b <branches>`  Comma-separated branches**
+ **`-host <addr>`  Dashboard listen address**
+ **`-port <port>`  Dashboard listen port**
  
 ### File Operations
 
