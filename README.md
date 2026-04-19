@@ -9,97 +9,97 @@ Gadirpull is a production-grade, versatile file synchronization and continuous d
 
 ### Multi-Source Synchronization
 
-- **Git Repositories - HTTP/HTTPS with token/password, SSH with key authentication 
-- **Local Directories - Watch any non-Git directory using `file://` protocol 
-- **NFS Shares - Mount and sync from NFS exports 
-- **SMB/CIFS Shares - Windows/Samba file shares with authentication 
-- **SSHFS - SSH File System mounts with key authentication 
-- **FTP/FTPS - FTP servers with TLS support and fallback local copy 
+- Git Repositories - HTTP/HTTPS with token/password, SSH with key authentication 
+- Local Directories - Watch any non-Git directory using `file://` protocol 
+- NFS Shares - Mount and sync from NFS exports 
+- SMB/CIFS Shares - Windows/Samba file shares with authentication 
+- SSHFS - SSH File System mounts with key authentication 
+- FTP/FTPS - FTP servers with TLS support and fallback local copy 
 
 ### Synchronization
 
-- **Configurable polling intervals (default 60 seconds)
-- **SHA256 file hashing for intelligent change detection
-- **Bidirectional conflict detection
-- **Multiple conflict types: modified_both, deleted_local, deleted_remote, added_both, dir_file_conflict
-- **Resolution options: keep_local, keep_remote, merge (with markers), auto resolution
-- **Interactive conflict resolution with file diff viewer
+- Configurable polling intervals (default 60 seconds)
+- SHA256 file hashing for intelligent change detection
+- Bidirectional conflict detection
+- Multiple conflict types: modified_both, deleted_local, deleted_remote, added_both, dir_file_conflict
+- Resolution options: keep_local, keep_remote, merge (with markers), auto resolution
+- Interactive conflict resolution with file diff viewer
 
 ### Backup & Recovery
 
-- **Automatic ZIP backups before each sync operation
-- **Configurable retention (keep up to 10 backups per repository)
-- **One-click restore from any backup via web dashboard
-- **Specific backup version selection
-- **Backup metadata tracking (timestamps, sizes, branch info)
-- **Backup statistics per repository
+- Automatic ZIP backups before each sync operation
+- Configurable retention (keep up to 10 backups per repository)
+- One-click restore from any backup via web dashboard
+- Specific backup version selection
+- Backup metadata tracking (timestamps, sizes, branch info)
+- Backup statistics per repository
 
 ### Build & Deployment
 
-- **Pre-commands (`buildcmd`) after successful sync (npm install, make install, composer install, etc.)
-- **Systemd service management (create, start, stop, restart)
-- **Command validation before service creation
-- **Working directory isolation for services
-- **Environment variable support
+- Pre-commands (`buildcmd`) after successful sync (npm install, make install, composer install, etc.)
+- Systemd service management (create, start, stop, restart)
+- Command validation before service creation
+- Working directory isolation for services
+- Environment variable support
 
 ### Security
 
-- **PAM authentication for web dashboard login
-- **Session management with inactivity timeout (10 minutes)
-- **Session persistence across daemon restarts
-- **Rate limiting for login attempts (3 attempts per 20 seconds)
-- **Command whitelisting - **restrict service commands to allowed list
-- **Systemd-run isolation for build/start commands
-- **Systemd credential encryption for sensitive files
-- **ProtectSystem=strict for services (read-only root)
-- **Private /tmp for services
-- **Credential auto-cleanup on repository deletion
+- PAM authentication for web dashboard login
+- Session management with inactivity timeout (10 minutes)
+- Session persistence across daemon restarts
+- Rate limiting for login attempts (3 attempts per 20 seconds)
+- Command whitelisting - restrict service commands to allowed list
+- Systemd-run isolation for build/start commands
+- Systemd credential encryption for sensitive files
+- ProtectSystem=strict for services (read-only root)
+- Private /tmp for services
+- Credential auto-cleanup on repository deletion
 
 ### Web Dashboard
 
-- **Real-time updates with Server-Sent Events (SSE)
-- **System metrics: CPU, memory, disk I/O, network
-- **Interactive Chart.js graphs for CPU and memory history
-- **Repository management: view, pull, pause, resume, delete
-- **Service control: start, stop, restart
-- **Automatic service port detection and display
-- **Backup management UI (browse, restore, delete)
-- **Conflict resolution UI with file diff viewer
-- **Side-by-side file diff for conflicts
-- **Per-repository action logs (clone, pull, buildcmd, restart, stop, start, restore)
-- **Search and filter repositories by name, path, or URL
-- **Dark/light theme toggle with system preference detection
-- **Session timeout warning
-- **Network and local access URL display
+- Real-time updates with Server-Sent Events (SSE)
+- System metrics: CPU, memory, disk I/O, network
+- Interactive Chart.js graphs for CPU and memory history
+- Repository management: view, pull, pause, resume, delete
+- Service control: start, stop, restart
+- Automatic service port detection and display
+- Backup management UI (browse, restore, delete)
+- Conflict resolution UI with file diff viewer
+- Side-by-side file diff for conflicts
+- Per-repository action logs (clone, pull, buildcmd, restart, stop, start, restore)
+- Search and filter repositories by name, path, or URL
+- Dark/light theme toggle with system preference detection
+- Session timeout warning
+- Network and local access URL display
 
 ### Monitoring & Metrics
 
-- **CPU usage percentage, model, core count, 60-point history
-- **Memory total, used, free, usage percentage, 60-point history
-- **Per-partition storage usage
-- **Disk I/O: read/write MB/s, total bytes
-- **Network: download/upload MB/s, total bytes
-- **Process: uptime, goroutines, open files, CPU%, memory MB
-- **Pull statistics: totals, success rate, average time
-- **Recent pull history (last 100 pulls)
+- CPU usage percentage, model, core count, 60-point history
+- Memory total, used, free, usage percentage, 60-point history
+- Per-partition storage usage
+- Disk I/O: read/write MB/s, total bytes
+- Network: download/upload MB/s, total bytes
+- Process: uptime, goroutines, open files, CPU%, memory MB
+- Pull statistics: totals, success rate, average time
+- Recent pull history (last 100 pulls)
 
 ### Notifications
 
-- **SMTP email alerts
-- **TLS support for secure delivery
-- **Event types: pull, clone, resume, pause, buildcmd, delete, restore
-- **Status filtering: success only, failure only, or both
-- **Configurable event selection
-- **Test email verification
+- SMTP email alerts
+- TLS support for secure delivery
+- Event types: pull, clone, resume, pause, buildcmd, delete, restore
+- Status filtering: success only, failure only, or both
+- Configurable event selection
+- Test email verification
 
 ### Network Share Management
 
-- **Temporary mounts (unmount on daemon shutdown)
-- **Persistent mounts via systemd units or /etc/fstab
-- **Secure credential storage (0600 permissions)
-- **Automatic remount on daemon startup
-- **Unique mount point generation
-- **FTP fallback to local copy if curlftpfs unavailable
+- Temporary mounts (unmount on daemon shutdown)
+- Persistent mounts via systemd units or /etc/fstab
+- Secure credential storage (0600 permissions)
+- Automatic remount on daemon startup
+- Unique mount point generation
+- FTP fallback to local copy if curlftpfs unavailable
 
 ### Command Line Interface
 
@@ -132,54 +132,54 @@ Gadirpull is a production-grade, versatile file synchronization and continuous d
  
 ### File Operations
 
-- **Recursive directory copy with permission preservation
-- **30-second interval change detection for non-Git directories
-- **SHA256 file hashing for change detection
-- **Merge with conflict markers (`<<<<<<< REMOTE`, `=======`, `>>>>>>> LOCAL`)
-- **Binary file detection to prevent corrupt merges
-- **CreateFile feature with text or file mode
-- **Overwrite confirmation for interactive mode
+- Recursive directory copy with permission preservation
+- 30-second interval change detection for non-Git directories
+- SHA256 file hashing for change detection
+- Merge with conflict markers (`<<<<<<< REMOTE`, `=======`, `>>>>>>> LOCAL`)
+- Binary file detection to prevent corrupt merges
+- CreateFile feature with text or file mode
+- Overwrite confirmation for interactive mode
 
 ### Repository Management
 
-- **Multi-branch tracking per repository
-- **Branch status: last status, check time, pull time, retry count
-- **Pause/resume syncing
-- **Automatic stashing of local changes before pull
-- **Force pull with `reset --hard` and `clean -fd`
-- **Git authentication injection into remote URLs
-- **SSH command customization with `GIT_SSH_COMMAND`
-- **Exponential backoff retry logic (5 retries, 5-60s backoff)
+- Multi-branch tracking per repository
+- Branch status: last status, check time, pull time, retry count
+- Pause/resume syncing
+- Automatic stashing of local changes before pull
+- Force pull with `reset --hard` and `clean -fd`
+- Git authentication injection into remote URLs
+- SSH command customization with `GIT_SSH_COMMAND`
+- Exponential backoff retry logic (5 retries, 5-60s backoff)
 
 ### System Integration
 
-- **Systemd daemon (`gadirpull-daemon.service`)
-- **Optional auto-start on boot
-- **Graceful shutdown with state saving (SIGINT, SIGTERM)
-- **Service state persistence across restarts
-- **Automatic restoration of previously running services
-- **Configuration directory: `/etc/gadirpull/`
-- **Credential directory: `/etc/gadirpull/credentials/`
-- **Backup directory: `/etc/gadirpull/backups/`
-- **JSON-based configuration (no external database)
+- Systemd daemon (`gadirpull-daemon.service`)
+- Optional auto-start on boot
+- Graceful shutdown with state saving (SIGINT, SIGTERM)
+- Service state persistence across restarts
+- Automatic restoration of previously running services
+- Configuration directory: `/etc/gadirpull/`
+- Credential directory: `/etc/gadirpull/credentials/`
+- Backup directory: `/etc/gadirpull/backups/`
+- JSON-based configuration (no external database)
 
 ### Error Handling
 
-- **Retry on transient errors (network, timeouts, SSL)
-- **Partial clone rollback on failure
-- **Backup restore if post-sync operations fail
-- **Conflict detection prevents data loss
-- **Graceful degradation (FTP fallback to local copy)
+- Retry on transient errors (network, timeouts, SSL)
+- Partial clone rollback on failure
+- Backup restore if post-sync operations fail
+- Conflict detection prevents data loss
+- Graceful degradation (FTP fallback to local copy)
 
 
 ### Developer-Friendly Features
 
-- **No External Database - Uses JSON files for all configuration
-- **Simple Configuration - Human-readable JSON in /etc/gadirpull/repos.json
-- **Comprehensive Logging - Per-action logs with command output
-- **API Endpoints - REST-like endpoints for all operations
-- **Event Streaming - SSE for real-time UI updates
-- **Cross-Platform - runs on any Linux system
+- No External Database - Uses JSON files for all configuration
+- Simple Configuration - Human-readable JSON in /etc/gadirpull/repos.json
+- Comprehensive Logging - Per-action logs with command output
+- API Endpoints - REST-like endpoints for all operations
+- Event Streaming - SSE for real-time UI updates
+- Cross-Platform - runs on any Linux system
     
     
 ### Installation
