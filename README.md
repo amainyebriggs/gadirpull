@@ -125,7 +125,7 @@ Gadirpull is a production-grade, versatile file synchronization and continuous d
  **`-filename <name>`  Destination filename**
  **`-text "<content>"`  Inline content for text mode** 
  **`-file <path>`  Source file for file mode**
- **`-c <seconds>`  Pull interval (default 60)**
+ **`-c <seconds>`  Pull interval (default 60) or webhook -c webhook**
  **`-b <branches>`  Comma-separated branches**
  **`-host <addr>`  Dashboard listen address**
  **`-port <port>`  Dashboard listen port**
@@ -412,6 +412,9 @@ sudo gardirpull -d -host 0.0.0.0
 
 # Start daemon with custom folders config
 sudo gardirpull -d -f /etc/myconfig/folders.txt
+
+# Enable webhook API endpoint for the daemon and gadirpull must be started with a webhook daemon before a webhook repository can be added 
+sudo gardirpull -d -webhook
 
 # Create systemd service (interactive)
 sudo gardirpull -service
