@@ -16,6 +16,11 @@ Gadirpull is a production-grade, versatile file synchronization and continuous d
 - SSHFS - SSH File System mounts with key authentication 
 - FTP/FTPS - FTP servers with TLS support and fallback local copy 
 
+### Multi-User Isolation
+
+- User-Based Repository Ownership - Each repository is tagged with the user who added it (`AddedBy` field). Only the original owner or root can view,list,find delete or update repository settings and actions via Cli or webdashboard, preventing unauthorized tampering in shared environments.
+
+
 ### Synchronization
 
 - Configurable polling intervals (default 60 seconds)
@@ -49,6 +54,8 @@ Gadirpull is a production-grade, versatile file synchronization and continuous d
 - Session persistence across daemon restarts
 - Rate limiting for login attempts (3 attempts per 20 seconds)
 - Command whitelisting - restrict service commands to allowed list
+- Command blacklisting - prevent service from accessing certain commands(-disallowedcmd)
+
 - Systemd-run isolation for build/start commands
 - Systemd credential encryption for sensitive files
 - ProtectSystem=strict for services (read-only root)
@@ -119,6 +126,8 @@ Gadirpull is a production-grade, versatile file synchronization and continuous d
  **`-startcmd <cmd>`  Service start command**
  **`-s`  Create systemd service for repository** 
  **`-allowedcmd <cmds>`  Comma-separated command whitelist** 
+**`-disallowedcmd <cmds>`  Comma-separated command blacklist** 
+
  **`-envencrypt <files>`  Encrypt files with systemd-creds**
  **`-envunencrypt`  Remove encrypted credentials**
  **`-createfile text\file`  Create file in repository** 
@@ -328,6 +337,46 @@ gadirpull -r file:///home/user/myapp -buildcmd "npm install" -s -startcmd "npm s
 # With allowed commands restriction
 gadirpull -r file:///opt/app -s -startcmd "php artisan serve" -allowedcmd "php,node,npm"
 
+
+# Block network tools and dangerous commands
+gadirpull -r https://github.com/user/app.git -s -startcmd "npm start" -disallowedcmd "curl,wget,nc,ssh,rm,chmod"
+
+# Block package managers and compilers
+gadirpull -r file:///opt/app -s -startcmd "node server.js" -disallowedcmd "apt,dnf,yum,gcc,make"
+
+# Combine both allowed and disallowed (cannot be used for same binary)
+gadirpull -r https://github.c
+
+# Mount NFS share and block dangerous commands
+gadirpull -r nfs://192.168.1.100/exports/app -s -startcmd "python3 app.py" -disallowedcmd "curl,wget,nc,ssh"
+
+# SMB share with command restrictions
+gadirpull -r smb://server/share/app -s -startcmd "./start.sh" -allowedcmd "./start.sh,node" -disallowedcmd "rm,chmod,sudo"
+
+# Watch local directory and block network commands
+gadirpull -r file:///var/www/legacy-app -s -startcmd "apache2 -DFOREGROUND" -disallowedcmd "curl,wget,telnet,nc"
+
+# FTP mount with command restrictions
+gadirpull -r ftp://files.example.com/webapp -s -startcmd "node index.js" -disallowedcmd "curl,wget,ssh,scp"
+
+# This will FAIL with an error:Error: Command 'node' cannot be both allowed and disallowed
+gadirpull -r https://github.com/user/app.git -allowedcmd "node,npm" -disallowedcmd "node,curl"
+
+
+# Web applications (block network tools)
+-disallowedcmd "curl,wget,nc,telnet,ssh,scp,sftp"
+
+# Database services (block shell access)
+-disallowedcmd "bash,sh,dash,zsh,su,sudo"
+
+# High-security environments (block everything except whitelist)
+-allowedcmd "/opt/app/bin/app" -disallowedcmd "curl,wget,nc,ssh,rm,chmod,chown,kill,pkill"
+
+# Development servers (block package managers to prevent tampering)
+-disallowedcmd "apt,apt-get,dnf,yum,pacman,dpkg,rpm"
+
+# Microservices (block process manipulation)
+-disallowedcmd "kill,pkill,killall,nohup,screen,tmux"
 
 # Basic NFS mount and sync
 gadirpull -r nfs://192.168.1.100/exported/path
