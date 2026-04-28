@@ -127,7 +127,7 @@ Gadirpull is a production-grade, versatile file synchronization and continuous d
  **`-s`  Create systemd service for repository** 
  **`-allowedcmd <cmds>`  Comma-separated command whitelist** 
 **`-disallowedcmd <cmds>`  Comma-separated command blacklist** 
-
+  **`-noexecpath` Comma-separated directories to block executions in directories (e.g., 'public,uploads,doc'). Only applied when -allowedcmd or -disallowedcmd is set**
  **`-envencrypt <files>`  Encrypt files with systemd-creds**
  **`-envunencrypt`  Remove encrypted credentials**
  **`-createfile text\file`  Create file in repository** 
@@ -328,6 +328,7 @@ gadirpull -r file:///path/to/source/directory
 gadirpull -r file:///home/user/myapp -c 10 -b 13.x -c 10 -buildcmd "npm install"  -startcmd "npm start" -allowedcmd "node, npm"
 
 
+
 # Example: Watch application assets
 gadirpull -r file:///var/www/html/assets
 
@@ -337,6 +338,8 @@ gadirpull -r file:///home/user/myapp -buildcmd "npm install" -s -startcmd "npm s
 # With allowed commands restriction
 gadirpull -r file:///opt/app -s -startcmd "php artisan serve" -allowedcmd "php,node,npm"
 
+# With noexecpath restriction prevents directories from being executable this is good to prevent shell execution in  upload, public , document directories 
+gadirpull -r https://github.com/user/app.git -s -startcmd "node server.js" -allowedcmd "node,npm" -noexecpath "public,uploads,tmp,storage"
 
 # Block network tools and dangerous commands
 gadirpull -r https://github.com/user/app.git -s -startcmd "npm start" -disallowedcmd "curl,wget,nc,ssh,rm,chmod"
