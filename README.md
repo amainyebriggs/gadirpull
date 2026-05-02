@@ -108,6 +108,10 @@ Gadirpull is a production-grade, versatile file synchronization and continuous d
 - Unique mount point generation
 - FTP fallback to local copy if curlftpfs unavailable
 
+### Hardware limiting(memory,cpu)
+
+- limit cpu and memory usage in service or restricted scope using -memlimit, -cpulimit
+
 ### Command Line Interface
 
  Command  Description 
@@ -128,6 +132,8 @@ Gadirpull is a production-grade, versatile file synchronization and continuous d
  **`-allowedcmd <cmds>`  Comma-separated command whitelist** 
 **`-disallowedcmd <cmds>`  Comma-separated command blacklist** 
   **`-noexecpath` Comma-separated directories to block executions in directories (e.g., 'public,uploads,doc'). Only applied when -allowedcmd or -disallowedcmd is set**
+  **`-memlimit <limit>     Memory limit for service (e.g., '512M', '1G', '2G'). Used with -s,-disallowedcmd,-allowedcmd flag**
+ **`-cpulimit <percent>   CPU quota percentage (e.g., -cpulimit 1, -cpulimit 1.5 cpu limit 2, the float value represent your limit to apllication from total cpu logical cores). Used with -s,-disallowedcmd,allowedcmd flag**
  **`-envencrypt <files>`  Encrypt files with systemd-creds**
  **`-envunencrypt`  Remove encrypted credentials**
  **`-createfile text\file`  Create file in repository** 
@@ -256,43 +262,43 @@ gardirpull -r git@github.com:user/repo.git -auth ssh -sshkey /etc/ssh/repo-key -
 ##	Service Management
 
 # Add repository with systemd service (auto-start on boot, auto-restart on failure)
-gardirpull -r https://github.com/user/node-app.git -s -cmd "node server.js"
+gardirpull -r https://github.com/user/node-app.git -s -startcmd "node server.js"
 
 # Add with service and custom interval
-gardirpull -r https://github.com/user/python-app.git -s -cmd "python app.py" -c 30
+gardirpull -r https://github.com/user/python-app.git -s -startcmd "python app.py" -c 30
 
 # Add Go service with build step
-gardirpull -r https://github.com/user/golang-api.git -s -cmd "./api-server" -precmd "go build -o api-server"
+gardirpull -r https://github.com/user/golang-api.git -s -startcmd "./api-server" -buildcmd "go build -o api-server"
 
 # Add Docker service
-gardirpull -r https://github.com/user/docker-app.git -s -cmd "docker-compose up -d"
+gardirpull -r https://github.com/user/docker-app.git -s -startcmd "docker-compose up -d"
 
 # Add systemd service for a specific branch
-gardirpull -r https://github.com/user/app.git -b production -s -cmd "/usr/bin/myapp --prod"
+gardirpull -r https://github.com/user/app.git -b production -s -startcmd "/usr/bin/myapp --prod"
 
 # Update existing repo to add service
-gardirpull -r https://github.com/user/app.git -s -cmd "node server.js"
+gardirpull -r https://github.com/user/app.git -s -startcmd "node server.js"
 
 
 ##	File Creation
 
 # Run build command after pull
-gardirpull -r https://github.com/user/app.git -precmd "make build"
+gardirpull -r https://github.com/user/app.git -buildcmd "make build"
 
 # Run multiple commands
-gardirpull -r https://github.com/user/app.git -precmd "npm install && npm run build"
+gardirpull -r https://github.com/user/app.git -buildcmd "npm install && npm run build"
 
 # Run with service restart
-gardirpull -r https://github.com/user/app.git -precmd "systemctl restart myapp"
+gardirpull -r https://github.com/user/app.git -buildcmd "systemctl restart myapp"
 
 # Run database migrations after pull
-gardirpull -r https://github.com/user/app.git -precmd "python manage.py migrate"
+gardirpull -r https://github.com/user/app.git -buildcmd "python manage.py migrate"
 
 # Run tests after update (optional, can fail without stopping)
-gardirpull -r https://github.com/user/app.git -precmd "go test ./... || true"
+gardirpull -r https://github.com/user/app.git -buildcmd "go test ./... || true"
 
-# Combine pre-cmd with service management
-gardirpull -r https://github.com/user/webapp.git -s -cmd "gunicorn app:app" -precmd "pip install -r requirements.txt"
+# Combine pre-startcmd with service management
+gardirpull -r https://github.com/user/webapp.git -s -startcmd "gunicorn app:app" -buildcmd "pip install -r requirements.txt"
 
 
 ##	Repository Management
@@ -305,6 +311,9 @@ gardirpull -r https://github.com/user/repo.git -delete
 gardirpull -list # List all respository
 
 gardirpull -find https://github.com/user/repo.git #find a respository
+
+
+# Network share  and file
 
 # Network share with full deployment pipeline for Git Directories
 gadirpull -r smb://buildserver/releases -b main -buildcmd "npm ci && npm run build" -s -startcmd "node dist/server.js" -allowedcmd "node,npm,pm2"
@@ -338,9 +347,6 @@ gadirpull -r file:///home/user/myapp -buildcmd "npm install" -s -startcmd "npm s
 # With allowed commands restriction
 gadirpull -r file:///opt/app -s -startcmd "php artisan serve" -allowedcmd "php,node,npm"
 
-# With noexecpath restriction prevents directories from being executable this is good to prevent shell execution in  upload, public , document directories 
-gadirpull -r https://github.com/user/app.git -s -startcmd "node server.js" -allowedcmd "node,npm" -noexecpath "public,uploads,tmp,storage"
-
 # Block network tools and dangerous commands
 gadirpull -r https://github.com/user/app.git -s -startcmd "npm start" -disallowedcmd "curl,wget,nc,ssh,rm,chmod"
 
@@ -369,6 +375,8 @@ gadirpull -r https://github.com/user/app.git -allowedcmd "node,npm" -disallowedc
 # Web applications (block network tools)
 -disallowedcmd "curl,wget,nc,telnet,ssh,scp,sftp"
 
+
+#Security
 # Database services (block shell access)
 -disallowedcmd "bash,sh,dash,zsh,su,sudo"
 
@@ -377,6 +385,9 @@ gadirpull -r https://github.com/user/app.git -allowedcmd "node,npm" -disallowedc
 
 # Development servers (block package managers to prevent tampering)
 -disallowedcmd "apt,apt-get,dnf,yum,pacman,dpkg,rpm"
+
+# With noexecpath restriction prevents directories from being executable this is good to prevent shell execution in  upload, public , document directories 
+gadirpull -r https://github.com/user/app.git -s -startcmd "node server.js" -allowedcmd "node,npm" -noexecpath "public,uploads,tmp,storage"
 
 # Microservices (block process manipulation)
 -disallowedcmd "kill,pkill,killall,nohup,screen,tmux"
@@ -488,8 +499,8 @@ sudo systemctl stop gardirpull-daemon
 
 ## Security-Command restriction##
    
-sudo gardirpull -r https://github.com/company/auth.git -s -cmd "node server" -precmd "npm install && mkdir foldername" -allowedcmd "node,npm,mkdir" ## this only expose the service to the allowed commands
-sudo gardirpull -r https://github.com/company/auth.git -s -cmd "node server" -precmd "npm install && mkdir foldername" -envencrypt "myfile.env,myfile.txt,myfile1.cert" ## encrypt files and only decrypt during runtome and send to memory then make it available via memory path to the os.env($CREDENTIALS_DIRECTORY/yourfilename). This approach combines hardware locking, file system isolation, and memory protection
+sudo gardirpull -r https://github.com/company/auth.git -s -startcmd "node server" -buildcmd "npm install && mkdir foldername" -allowedcmd "node,npm,mkdir" ## this only expose the service to the allowed commands
+sudo gardirpull -r https://github.com/company/auth.git -s -startcmd "node server" -buildcmd "npm install && mkdir foldername" -envencrypt "myfile.env,myfile.txt,myfile1.cert" ## encrypt files and only decrypt during runtome and send to memory then make it available via memory path to the os.env($CREDENTIALS_DIRECTORY/yourfilename). This approach combines hardware locking, file system isolation, and memory protection
 
     # DON'T allow dangerous wildcards
 -allowedcmd "*"                    # Defeats the purpose
@@ -503,24 +514,24 @@ sudo gardirpull -r https://github.com/company/auth.git -s -cmd "node server" -pr
 ##	Docker Microservices Stack
 
 # Service 1: API Gateway
-cd /opt/services && gardirpull -r https://github.com/company/gateway.git -s -cmd "docker-compose up -d gateway"
+cd /opt/services && gardirpull -r https://github.com/company/gateway.git -s -startcmd "docker-compose up -d gateway"
 
 # Service 2: Auth Service  
-gardirpull -r https://github.com/company/auth.git -s -cmd "docker-compose up -d auth"
+gardirpull -r https://github.com/company/auth.git -s -startcmd "docker-compose up -d auth"
 
 # Service 3: Worker Service
-gardirpull -r https://github.com/company/worker.git -s -cmd "docker-compose up -d worker"
+gardirpull -r https://github.com/company/worker.git -s -startcmd "docker-compose up -d worker"
 
 # Pull static site and reload nginx
-cd /var/www/html && gardirpull -r https://github.com/company/website.git -b main -precmd "chown -R www-data:www-data . && systemctl reload nginx"
+cd /var/www/html && gardirpull -r https://github.com/company/website.git -b main -buildcmd "chown -R www-data:www-data . && systemctl reload nginx"
 
 #	Auto-Deploy Node.js Application
 # Add repository with auto-restart
 
-cd /var/www && gardirpull -r https://github.com/company/webapp.git -b production -s -cmd "node server.js" -precmd "npm install && npm run build" -createfile text -filename .env -text "NODE_ENV=production\nPORT=4000"
+cd /var/www && gardirpull -r https://github.com/company/webapp.git -b production -s -startcmd "node server.js" -buildcmd "npm install && npm run build" -createfile text -filename .env -text "NODE_ENV=production\nPORT=4000"
   
 #CI/CD Pipeline Integration
 
 # Build and test on pull
-gardirpull -r https://github.com/company/app.git -precmd "make test && make build && systemctl restart app" -createfile text -filename .version -text "v1.0.0"
+gardirpull -r https://github.com/company/app.git -buildcmd "make test && make build && systemctl restart app" -createfile text -filename .version -text "v1.0.0"
 ```
