@@ -145,6 +145,47 @@ Gadirpull is a production-grade, versatile file synchronization and continuous d
  **`-host <addr>`  Dashboard listen address**
  **`-port <port>`  Dashboard listen port**
  
+ 
+ 
+### Reverse Proxy Configuration
+
+- `-proxy <type>`  
+  Setup reverse proxy server. Supported(requires, apache,nginx,caddy,traefik,haproxy installed): `nginx`, `apache`, `caddy`, `traefik`, `haproxy`.  
+  **Examples:**  
+  `gadirpull -r <url> -proxy nginx`  
+  `gadirpull -r <url> -proxy apache`
+
+- `-proxydomain <domain>`  
+  Domain name configuration:  
+  • `example.com` — Root domain mode (application or repo service or repo serve at `http://example.com/`)  
+  • `example.com#` — Sub-path mode (application or repo service or repo serve at `http://example.com/repo-name/`)  
+  • `#` — Catch-all mode (application or repo service or repo serve at `http://YOUR_IP/repo-name/` — recommended for multiple apps)  
+  • `""` — Same as catch-all mode  
+  **Default:** `#` (catch-all mode)
+
+- `-proxystaticpath <path|indexes>`  
+  Serve static files instead of proxying to a backend service.  
+  • `"index.html,index.php"` — Serve from repo root with specified index files  
+  • `/var/www/mysite` — Serve from custom absolute path  
+  **Examples:**  
+  `gadirpull -r <static-site> -proxystaticpath "index.html,index.htm"`  
+  `gadirpull -r <static-site> -proxystaticpath "/var/www/html/mysite"`
+
+- `-proxyssl <mode>`  
+  Enable SSL/TLS encryption(requires certbot installed if you want to auto generate your own ssl certificate):  
+  • `false` — HTTP only (default)  
+  • `true` — Manual SSL certificates (place in `/etc/{nginx,apache2}/ssl/domain/`)  
+  • `certbot` — Auto-generate with Let's Encrypt (requires real domain)  
+  **Examples:**  
+  `gadirpull -r <url> -proxydomain example.com -proxyssl true`  
+  `gadirpull -r <url> -proxydomain example.com -proxyssl certbot`
+
+- `-proxycache`  
+  Enable static asset caching (30 days) for images, CSS, JS, fonts, etc.  
+  Cached extensions: `.css`, `.js`, `.jpg`, `.png`, `.gif`, `.svg`, `.mp4`, `.pdf`, `.doc`, `.docx`, `.zip`, `.tar`, and 30+ more.  
+  **Example:** `gadirpull -r <url> -proxy nginx -proxycache`
+  
+ 
 ### File Operations
 
 - Recursive directory copy with permission preservation
