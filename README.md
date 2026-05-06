@@ -168,8 +168,7 @@ Gadirpull is a production-grade, versatile file synchronization and continuous d
   • `"index.html,index.php"` — Serve from repo root with specified index files  
   • `/var/www/mysite` — Serve from custom absolute path  
   **Examples:**  
-  `gadirpull -r <static-site> -proxystaticpath "index.html,index.htm"`  
-  `gadirpull -r <static-site> -proxystaticpath "/var/www/html/mysite"`
+  `gadirpull -r repo url/file -proxystaticpath "index.html,index.htm,index.php"`  
 
 - `-proxyssl <mode>`  
   Enable SSL/TLS encryption(requires certbot installed if you want to auto generate your own ssl certificate):  
