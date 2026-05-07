@@ -150,7 +150,7 @@ Gadirpull is a production-grade, versatile file synchronization and continuous d
 ### Reverse Proxy Configuration
 
 - `-proxy <type>`  
-  Setup reverse proxy server. Supported(requires, apache,nginx,caddy,traefik,haproxy installed): `nginx`, `apache`, `caddy`, `traefik`, `haproxy`.  
+  Setup reverse proxy server. Supported(requires, apache,nginx,traefik,haproxy installed): `nginx`, `apache`, `traefik`, `haproxy`.  
   **Examples:**  
   `gadirpull -r <url> -proxy nginx`  
   `gadirpull -r <url> -proxy apache`
