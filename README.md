@@ -184,61 +184,61 @@ Gadirpull is a production-grade, versatile file synchronization and continuous d
 
 **`-service`  Create/remove systemd daemon service** 
 
-**`-auth \\\<type\\\>`  Authentication type (none/token/password/ssh)** 
+**`-auth <type>`  Authentication type (none/token/password/ssh)** 
 
-**`-token \\\<value\\\>`  Token or password** 
+**`-token <value>`  Token or password** 
 
-**`-user \\\<username\\\>`  Username for HTTPS auth** 
+**`-user <username>`  Username for HTTPS auth** 
 
-**`-sshkey \\\<path\\\>`  SSH private key path** 
+**`-sshkey <path>`  SSH private key path** 
 
-**`-buildcmd \\\<cmd\\\>`  Build command after sync** 
+**`-buildcmd <cmd>`  Build command after sync** 
 
-**`-startcmd \\\<cmd\\\>`  Service start command** 
+**`-startcmd <cmd>`  Service start command** 
 
 **`-s`  Create systemd service for repository** 
 
-**`-allowedcmd \\\<cmds\\\>`  Comma-separated command whitelist** 
+**`-allowedcmd <cmds>`  Comma-separated command whitelist** 
 
-**`-disallowedcmd \\\<cmds\\\>`  Comma-separated command blacklist** 
+**`-disallowedcmd <cmds>`  Comma-separated command blacklist** 
 
-**`-noexecpath` Comma-separated directories to block executions in directories (e.g., 'public,uploads,doc'). Only applied when -allowedcmd or -disallowedcmd is set** **`-memlimit \\\<limit\\\>     Memory limit for service (e.g., '512M', '1G', '2G'). Used with -s,-disallowedcmd,-allowedcmd flag\\\*\\\* \\\*\\\*`**
+**`-noexecpath` Comma-separated directories to block executions in directories (e.g., 'public,uploads,doc'). Only applied when -allowedcmd or -disallowedcmd is set** **`-memlimit <limit>     Memory limit for service (e.g., '512M', '1G', '2G'). Used with -s,-disallowedcmd,-allowedcmd flag** **`**
 
 **-cpulimit    CPU quota percentage (e.g., -cpulimit 1, -cpulimit 1.5 cpu limit 2, the float value represent your limit to apllication from total cpu logical cores). Used with -s,-disallowedcmd,allowedcmd flag** 
 
-**`-envencrypt \\\<files\\\>`  Encrypt files with systemd-creds** **`-envunencrypt`  Remove encrypted credentials** **`-createfile text\\\\file`  Create file in repository** 
+**`-envencrypt <files>`  Encrypt files with systemd-creds** **`-envunencrypt`  Remove encrypted credentials** **`-createfile text\file`  Create file in repository** 
 
-**`-filename \\\<name\\\>`  Destination filename** **`-text "\\\<content\\\>"`  Inline content for text mode** **`-file \\\<path\\\>`  Source file for file mode** 
+**`-filename <name>`  Destination filename** **`-text "<content>"`  Inline content for text mode** **`-file <path>`  Source file for file mode** 
 
-**`-c \\\<seconds\\\>`  Pull interval (default 60) or webhook -c webhook** **`-b \\\<branches\\\>`  Comma-separated branches** **`-host \\\<addr\\\>`  Dashboard listen address** **`-port \\\<port\\\>`  Dashboard listen port**
+**`-c <seconds>`  Pull interval (default 60) or webhook -c webhook** **`-b <branches>`  Comma-separated branches** **`-host <addr>`  Dashboard listen address** **`-port <port>`  Dashboard listen port**
 
 ### Reverse Proxy Configuration
 
-- `-proxy \\\<type\\\>`  
+- `-proxy <type>`  
 Setup reverse proxy server. Supported(requires, apache,nginx,traefik,haproxy installed): `nginx`, `apache`, `traefik`, `haproxy`.  
 **Examples:**  
 `gadirpull -r repo -proxy nginx`  
 `gadirpull -r repo -proxy apache`
 
-- `-proxydomain \\\<domain\\\>`  
+- `-proxydomain <domain>`  
 Domain name configuration:  
 • `example.com` — Root domain mode (application or repo service or repo serve at `http://example.com/`)  
-• `example.com\\\#` — Sub-path mode (application or repo service or repo serve at `http://example.com/repo-name/`)  
-• `\\\#` — Catch-all mode (application or repo service or repo serve at `http://YOUR\\\_IP/repo-name/` — recommended for multiple apps)  
+• `example.com#` — Sub-path mode (application or repo service or repo serve at `http://example.com/repo-name/`)  
+• `#` — Catch-all mode (application or repo service or repo serve at `http://YOUR_IP/repo-name/` — recommended for multiple apps)  
 • `""` — Same as catch-all mode  
-**Default:** `\\\#` (catch-all mode)
+**Default:** `#` (catch-all mode)
 
-- `-proxystaticpath \\\<path|indexes\\\>`  
+- `-proxystaticpath <path|indexes>`  
 Serve static files instead of proxying to a backend service.  
 • `"index.html,index.php"` — Serve from repo root with specified index files  
 • `/var/www/mysite` — Serve from custom absolute path  
 **Examples:**  
 `gadirpull -r repo url/file -proxystaticpath "index.html,index.htm,index.php"`
 
-- `-proxyssl \\\<mode\\\>`  
+- `-proxyssl <mode>`  
 Enable SSL/TLS encryption(requires certbot installed if you want to auto generate your own ssl certificate):  
 • `false` — HTTP only (default)  
-• `true` — Manual SSL certificates (place in `/etc/\\\{nginx,apache2\\\}/ssl/domain/`)  
+• `true` — Manual SSL certificates (place in `/etc/{nginx,apache2}/ssl/domain/`)  
 • `certbot` — Auto-generate with Let's Encrypt (requires real domain)  
 **Examples:**  
 `gadirpull -r repo -proxydomain example.com -proxyssl true`  
@@ -263,7 +263,7 @@ Interactive wizard for proxy configuration management for exposing gadirpull-dae
 
 - SHA256 file hashing for change detection
 
-- Merge with conflict markers (`\\\<\\\<\\\<\\\<\\\<\\\<\\\< REMOTE`, `=======`, `\\\>\\\>\\\>\\\>\\\>\\\>\\\> LOCAL`)
+- Merge with conflict markers (`<<<<<<< REMOTE`, `=======`, `>>>>>>> LOCAL`)
 
 - Binary file detection to prevent corrupt merges
 
@@ -285,7 +285,7 @@ Interactive wizard for proxy configuration management for exposing gadirpull-dae
 
 - Git authentication injection into remote URLs
 
-- SSH command customization with `GIT\\\_SSH\\\_COMMAND`
+- SSH command customization with `GIT_SSH_COMMAND`
 
 - Exponential backoff retry logic (5 retries, 5-60s backoff)
 
@@ -338,260 +338,260 @@ Interactive wizard for proxy configuration management for exposing gadirpull-dae
 ### Installation
 
 ```
-\\\# Clone and build    
+# Clone and build    
 git clone https://github.com/amainyebriggs/gardirpull.git    
 cd gardirpull    
 sudo chmod +x gardirpull    
     
-\\\# Or install directly    
-sudo cp gardirpull /usr/local/bin/  && rehash \\\# Run gardirpull as system wide global command    
+# Or install directly    
+sudo cp gardirpull /usr/local/bin/  && rehash # Run gardirpull as system wide global command    
     
-sudo ./gardirpull -d \\\# Run gardirpull as a non system-wide global command    
+sudo ./gardirpull -d # Run gardirpull as a non system-wide global command    
     
-\\\#\\\#  First initialization    
+##  First initialization    
     
-gardirpull --service \\\# create the gardirpull as a service and start the gardirpull service on port :8445    
-\\\#or create a git -r respository clone and gardirpull ask you if you want to run gardirpull as a service 
+gardirpull --service # create the gardirpull as a service and start the gardirpull service on port :8445    
+#or create a git -r respository clone and gardirpull ask you if you want to run gardirpull as a service 
 ```
 
 ![](dashboard.png "dashboard")
 
 ```
-\\\#\\\#	Basic usage    
+##	Basic usage    
     
-\\\# Add a repository with default settings (main branch, 60s interval)    
+# Add a repository with default settings (main branch, 60s interval)    
 gardirpull -r https://github.com/user/repo.git    
     
-\\\# Add with specific branch    
+# Add with specific branch    
 gardirpull -r https://github.com/user/repo.git -b develop    
     
-\\\# Add with multiple branches    
+# Add with multiple branches    
 gardirpull -r https://github.com/user/repo.git -b main,develop,staging,feature-x    
     
-\\\# Add with custom pull interval (120 seconds)    
+# Add with custom pull interval (120 seconds)    
 gardirpull -r https://github.com/user/repo.git -c 120    
     
-\\\# Add repository in specific directory (run from that directory)    
+# Add repository in specific directory (run from that directory)    
 cd /var/www/ && gardirpull -r https://github.com/user/webapp.git    
     
-\\\# Add multiple repositories in different folders    
+# Add multiple repositories in different folders    
 cd /home/user/projects    
 gardirpull -r https://github.com/user/backend.git    
     
 cd /var/services && gardirpull -r https://github.com/user/api-gateway.git    
     
-\\\#\\\#	Authentication Usage    
+##	Authentication Usage    
     
-\\\# HTTPS with GitHub Personal Access Token    
-gardirpull -r https://github.com/user/private-repo.git -auth token -token ghp\\\_xxxxxxxxxxxx    
+# HTTPS with GitHub Personal Access Token    
+gardirpull -r https://github.com/user/private-repo.git -auth token -token ghp_xxxxxxxxxxxx    
     
-\\\# HTTPS with username and password    
+# HTTPS with username and password    
 gardirpull -r https://gitlab.com/user/repo.git -auth password -user myusername -token mypassword    
     
-\\\# SSH with default key (~/.ssh/id\\\_rsa)    
+# SSH with default key (~/.ssh/id_rsa)    
 gardirpull -r git@github.com:user/repo.git    
     
-\\\# SSH with custom private key    
+# SSH with custom private key    
 gardirpull -r git@github.com:user/repo.git -auth ssh -sshkey /home/user/.ssh/deploy-key    
     
-\\\# SSH with custom key and specific branch    
+# SSH with custom key and specific branch    
 gardirpull -r git@github.com:user/repo.git -auth ssh -sshkey /etc/ssh/repo-key -b production    
     
-\\\#\\\#	Service Management    
+##	Service Management    
     
-\\\# Add repository with systemd service (auto-start on boot, auto-restart on failure)    
+# Add repository with systemd service (auto-start on boot, auto-restart on failure)    
 gardirpull -r https://github.com/user/node-app.git -s -startcmd "node server.js"    
     
-\\\# Add with service and custom interval    
+# Add with service and custom interval    
 gardirpull -r https://github.com/user/python-app.git -s -startcmd "python app.py" -c 30    
     
-\\\# Add Go service with build step    
+# Add Go service with build step    
 gardirpull -r https://github.com/user/golang-api.git -s -startcmd "./api-server" -buildcmd "go build -o api-server"    
     
-\\\# Add Docker service    
+# Add Docker service    
 gardirpull -r https://github.com/user/docker-app.git -s -startcmd "docker-compose up -d"    
     
-\\\# Add systemd service for a specific branch    
+# Add systemd service for a specific branch    
 gardirpull -r https://github.com/user/app.git -b production -s -startcmd "/usr/bin/myapp --prod"    
     
-\\\# Update existing repo to add service    
+# Update existing repo to add service    
 gardirpull -r https://github.com/user/app.git -s -startcmd "node server.js"    
     
     
-\\\#\\\#	File Creation    
+##	File Creation    
     
-\\\# Run build command after pull    
+# Run build command after pull    
 gardirpull -r https://github.com/user/app.git -buildcmd "make build"    
     
-\\\# Run multiple commands    
+# Run multiple commands    
 gardirpull -r https://github.com/user/app.git -buildcmd "npm install && npm run build"    
     
-\\\# Run with service restart    
+# Run with service restart    
 gardirpull -r https://github.com/user/app.git -buildcmd "systemctl restart myapp"    
     
-\\\# Run database migrations after pull    
+# Run database migrations after pull    
 gardirpull -r https://github.com/user/app.git -buildcmd "python manage.py migrate"    
     
-\\\# Run tests after update (optional, can fail without stopping)    
+# Run tests after update (optional, can fail without stopping)    
 gardirpull -r https://github.com/user/app.git -buildcmd "go test ./... || true"    
     
-\\\# Combine pre-startcmd with service management    
+# Combine pre-startcmd with service management    
 gardirpull -r https://github.com/user/webapp.git -s -startcmd "gunicorn app:app" -buildcmd "pip install -r requirements.txt"    
     
     
-\\\#\\\#	Repository Management    
+##	Repository Management    
     
-\\\# Delete a repository (removes files and service)    
+# Delete a repository (removes files and service)    
 gardirpull -r https://github.com/user/repo.git -delete    
     
-\\\# List all respository    
+# List all respository    
     
-gardirpull -list \\\# List all respository    
+gardirpull -list # List all respository    
     
-gardirpull -find https://github.com/user/repo.git \\\#find a respository    
+gardirpull -find https://github.com/user/repo.git #find a respository    
     
     
-\\\# Network share  and file    
+# Network share  and file    
     
-\\\# Network share with full deployment pipeline for Git Directories    
+# Network share with full deployment pipeline for Git Directories    
 gadirpull -r smb://buildserver/releases -b main -buildcmd "npm ci && npm run build" -s -startcmd "node dist/server.js" -allowedcmd "node,npm,pm2"    
     
-\\\# Local directory watch with encrypted credentials    
+# Local directory watch with encrypted credentials    
 gadirpull -r file:///etc/app/config -c 10 -b master -s -startcmd "./app" -envencrypt ".env,secrets.json"    
     
-\\\# NFS share with backup and restore    
+# NFS share with backup and restore    
 gadirpull -r nfs://storage.local/database -c 10 -b dev -buildcmd "./validate.sh"    
     
-\\\# SSHFS with allowed commands restriction    
+# SSHFS with allowed commands restriction    
 gadirpull -r sshfs://deployer@server.com/app -c 10 -b nightbuild -s -startcmd "gunicorn app:application" -allowedcmd "gunicorn,python,nginx"    
     
-\\\# FTP watch with build automation    
+# FTP watch with build automation    
 gadirpull -r ftp://updates.server.com/patches -c 10 -b master -buildcmd "./apply-patches.sh" -s -startcmd "systemctl reload service"    
     
     
-\\\# Watch and sync a local non-Git directory    
+# Watch and sync a local non-Git directory    
 gadirpull -r file:///path/to/source/directory    
     
 gadirpull -r file:///home/user/myapp -c 10 -b 13.x -c 10 -buildcmd "npm install"  -startcmd "npm start" -allowedcmd "node, npm"    
     
     
     
-\\\# Example: Watch application assets    
+# Example: Watch application assets    
 gadirpull -r file:///var/www/html/assets    
     
-\\\# With build command and service    
+# With build command and service    
 gadirpull -r file:///home/user/myapp -buildcmd "npm install" -s -startcmd "npm start"    
     
-\\\# With allowed commands restriction    
+# With allowed commands restriction    
 gadirpull -r file:///opt/app -s -startcmd "php artisan serve" -allowedcmd "php,node,npm"    
     
-\\\# Block network tools and dangerous commands    
+# Block network tools and dangerous commands    
 gadirpull -r https://github.com/user/app.git -s -startcmd "npm start" -disallowedcmd "curl,wget,nc,ssh,rm,chmod"    
     
-\\\# Block package managers and compilers    
+# Block package managers and compilers    
 gadirpull -r file:///opt/app -s -startcmd "node server.js" -disallowedcmd "apt,dnf,yum,gcc,make"    
     
-\\\# Combine both allowed and disallowed (cannot be used for same binary)    
+# Combine both allowed and disallowed (cannot be used for same binary)    
 gadirpull -r https://github.c    
     
-\\\# Mount NFS share and block dangerous commands    
+# Mount NFS share and block dangerous commands    
 gadirpull -r nfs://192.168.1.100/exports/app -s -startcmd "python3 app.py" -disallowedcmd "curl,wget,nc,ssh"    
     
-\\\# SMB share with command restrictions    
+# SMB share with command restrictions    
 gadirpull -r smb://server/share/app -s -startcmd "./start.sh" -allowedcmd "./start.sh,node" -disallowedcmd "rm,chmod,sudo"    
     
-\\\# Watch local directory and block network commands    
+# Watch local directory and block network commands    
 gadirpull -r file:///var/www/legacy-app -s -startcmd "apache2 -DFOREGROUND" -disallowedcmd "curl,wget,telnet,nc"    
     
-\\\# FTP mount with command restrictions    
+# FTP mount with command restrictions    
 gadirpull -r ftp://files.example.com/webapp -s -startcmd "node index.js" -disallowedcmd "curl,wget,ssh,scp"    
     
-\\\# This will FAIL with an error:Error: Command 'node' cannot be both allowed and disallowed    
+# This will FAIL with an error:Error: Command 'node' cannot be both allowed and disallowed    
 gadirpull -r https://github.com/user/app.git -allowedcmd "node,npm" -disallowedcmd "node,curl"    
     
     
-\\\# Web applications (block network tools)    
+# Web applications (block network tools)    
 -disallowedcmd "curl,wget,nc,telnet,ssh,scp,sftp"    
     
     
-\\\#Security    
-\\\# Database services (block shell access)    
+#Security    
+# Database services (block shell access)    
 -disallowedcmd "bash,sh,dash,zsh,su,sudo"    
     
-\\\# High-security environments (block everything except whitelist)    
+# High-security environments (block everything except whitelist)    
 -allowedcmd "/opt/app/bin/app" -disallowedcmd "curl,wget,nc,ssh,rm,chmod,chown,kill,pkill"    
     
-\\\# Development servers (block package managers to prevent tampering)    
+# Development servers (block package managers to prevent tampering)    
 -disallowedcmd "apt,apt-get,dnf,yum,pacman,dpkg,rpm"    
     
-\\\# With noexecpath restriction prevents directories from being executable this is good to prevent shell execution in  upload, public , document directories     
+# With noexecpath restriction prevents directories from being executable this is good to prevent shell execution in  upload, public , document directories     
 gadirpull -r https://github.com/user/app.git -s -startcmd "node server.js" -allowedcmd "node,npm" -noexecpath "public,uploads,tmp,storage"    
     
-\\\# Microservices (block process manipulation)    
+# Microservices (block process manipulation)    
 -disallowedcmd "kill,pkill,killall,nohup,screen,tmux"    
     
-\\\# Basic NFS mount and sync    
+# Basic NFS mount and sync    
 gadirpull -r nfs://192.168.1.100/exported/path    
     
-\\\# NFS with specific export path    
+# NFS with specific export path    
 gadirpull -r nfs://server.example.com/srv/nfs/share    
     
-\\\# NFS with authentication (if required)    
+# NFS with authentication (if required)    
 gadirpull -r nfs://server/share -user username -token password    
     
-\\\# NFS with persistent mount (systemd)    
-\\\# Will prompt: Choose \\\[1/2/3\\\] -\\\> select 2 for systemd persistent    
+# NFS with persistent mount (systemd)    
+# Will prompt: Choose [1/2/3] -> select 2 for systemd persistent    
 gadirpull -r nfs://192.168.1.100/exports/data    
     
-\\\# Basic SMB share (guest access)    
+# Basic SMB share (guest access)    
 gadirpull -r smb://server/sharename    
     
-\\\# SMB with username and password    
+# SMB with username and password    
 gadirpull -r smb://192.168.1.50/shared -user myuser -token mypassword    
     
-\\\# CIFS protocol (alias for SMB)    
-gadirpull -r cifs://server/documents -user domain\\\\\\\\user -token pass123    
+# CIFS protocol (alias for SMB)    
+gadirpull -r cifs://server/documents -user domain\\user -token pass123    
     
-\\\# SMB with persistent mount via fstab    
-\\\# Will prompt: Choose \\\[1/2/3\\\] -\\\> select 3 for fstab persistent    
+# SMB with persistent mount via fstab    
+# Will prompt: Choose [1/2/3] -> select 3 for fstab persistent    
 gadirpull -r smb://storage.local/files -user smbuser -token secret    
     
-\\\# SMB with build command    
+# SMB with build command    
 gadirpull -r smb://buildserver/releases -buildcmd "make install" -s -startcmd "php serve"    
     
-\\\# Basic SSHFS with default SSH key (~/.ssh/id\\\_rsa)    
+# Basic SSHFS with default SSH key (~/.ssh/id_rsa)    
 gadirpull -r sshfs://user@server.com/remote/path    
     
-\\\# SSHFS with specific SSH key    
-gadirpull -r sshfs://user@192.168.1.100/var/www -sshkey /home/user/.ssh/deploy\\\_key    
+# SSHFS with specific SSH key    
+gadirpull -r sshfs://user@192.168.1.100/var/www -sshkey /home/user/.ssh/deploy_key    
     
-\\\# SSHFS with username in URL    
+# SSHFS with username in URL    
 gadirpull -r sshfs://deployer@example.com/opt/apps    
     
-\\\# SSHFS with persistent systemd mount    
-\\\# Will prompt: Choose \\\[1/2/3\\\] -\\\> select 2 for systemd persistent    
-gadirpull -r sshfs://git@github.com/user/repo.git -sshkey /root/.ssh/github\\\_key    
+# SSHFS with persistent systemd mount    
+# Will prompt: Choose [1/2/3] -> select 2 for systemd persistent    
+gadirpull -r sshfs://git@github.com/user/repo.git -sshkey /root/.ssh/github_key    
     
-\\\# SSHFS with build and service    
+# SSHFS with build and service    
 gadirpull -r sshfs://builder@buildserver.internal/builds -buildcmd "docker compose build" -s -startcmd "docker compose up"    
     
-\\\# Basic FTP (anonymous)    
+# Basic FTP (anonymous)    
 gadirpull -r ftp://ftp.example.com/pub/files    
     
-\\\# FTP with username and password    
+# FTP with username and password    
 gadirpull -r ftp://example.com/uploads -user myuser -token mypassword    
     
-\\\# FTPS (FTP over TLS)    
+# FTPS (FTP over TLS)    
 gadirpull -r ftps://secure.server.com/data -user secureuser -token securepass    
     
-\\\# FTP with credentials in URL    
+# FTP with credentials in URL    
 gadirpull -r ftp://user:pass@ftp.server.com/directory    
     
-\\\# FTP fallback mode (if curlftpfs not available)    
-\\\# Automatically uses local copy fallback    
+# FTP fallback mode (if curlftpfs not available)    
+# Automatically uses local copy fallback    
 gadirpull -r ftp://backup.server.com/archives    
     
-\\\# FTP with build command (for non-Git content)    
+# FTP with build command (for non-Git content)    
 gadirpull -r ftp://assets.server.com/static -buildcmd "make && make install"
 ```
 
@@ -599,77 +599,77 @@ gadirpull -r ftp://assets.server.com/static -buildcmd "make && make install"
 
 ```
     
-\\\#\\\#	Daemon Management- Daemon can be used if Gardirpull is not running as a systemd service     
+##	Daemon Management- Daemon can be used if Gardirpull is not running as a systemd service     
     
-\\\# Start daemon in foreground (for testing)    
+# Start daemon in foreground (for testing)    
 sudo gardirpull -d    
     
-\\\# Start daemon on specific network interface (local only - default)    
+# Start daemon on specific network interface (local only - default)    
 sudo gardirpull -d -host 127.0.0.1    
     
-\\\# Start daemon accessible from network (all interfaces)    
+# Start daemon accessible from network (all interfaces)    
 sudo gardirpull -d -host 0.0.0.0    
     
-\\\# Start daemon with custom folders config    
+# Start daemon with custom folders config    
 sudo gardirpull -d -f /etc/myconfig/folders.txt    
     
-\\\# Enable webhook API endpoint for the daemon and gadirpull must be started with a webhook daemon before a webhook repository can be added     
+# Enable webhook API endpoint for the daemon and gadirpull must be started with a webhook daemon before a webhook repository can be added     
 sudo gardirpull -d -webhook    
     
-\\\# Create systemd service (interactive)    
+# Create systemd service (interactive)    
 sudo gardirpull -service    
     
-\\\# Remove systemd service and config (interactive)    
+# Remove systemd service and config (interactive)    
 sudo gardirpull -service    
     
-\\\# Check service status    
+# Check service status    
 sudo systemctl status gardirpull-daemon    
     
-\\\# Restart daemon    
+# Restart daemon    
 sudo systemctl restart gardirpull-daemon    
     
-\\\# View gadirpull daemon service logs    
+# View gadirpull daemon service logs    
 sudo journalctl -u gardirpull-daemon -f    
     
-\\\# Stop daemon    
+# Stop daemon    
 sudo systemctl stop gardirpull-daemon    
     
-\\\#\\\# Security-Command restriction\\\#\\\#    
+## Security-Command restriction##    
        
-sudo gardirpull -r https://github.com/company/auth.git -s -startcmd "node server" -buildcmd "npm install && mkdir foldername" -allowedcmd "node,npm,mkdir" \\\#\\\# this only expose the service to the allowed commands    
-sudo gardirpull -r https://github.com/company/auth.git -s -startcmd "node server" -buildcmd "npm install && mkdir foldername" -envencrypt "myfile.env,myfile.txt,myfile1.cert" \\\#\\\# encrypt files and only decrypt during runtome and send to memory then make it available via memory path to the os.env($CREDENTIALS\\\_DIRECTORY/yourfilename). This approach combines hardware locking, file system isolation, and memory protection    
+sudo gardirpull -r https://github.com/company/auth.git -s -startcmd "node server" -buildcmd "npm install && mkdir foldername" -allowedcmd "node,npm,mkdir" ## this only expose the service to the allowed commands    
+sudo gardirpull -r https://github.com/company/auth.git -s -startcmd "node server" -buildcmd "npm install && mkdir foldername" -envencrypt "myfile.env,myfile.txt,myfile1.cert" ## encrypt files and only decrypt during runtome and send to memory then make it available via memory path to the os.env($CREDENTIALS_DIRECTORY/yourfilename). This approach combines hardware locking, file system isolation, and memory protection    
     
-    \\\# DON'T allow dangerous wildcards    
--allowedcmd "\\\*"                    \\\# Defeats the purpose    
+    # DON'T allow dangerous wildcards    
+-allowedcmd "*"                    # Defeats the purpose    
     
-\\\# DON'T allow shell access    
--allowedcmd "sh,bash,dash"         \\\# Allows arbitrary command execution    
+# DON'T allow shell access    
+-allowedcmd "sh,bash,dash"         # Allows arbitrary command execution    
     
-\\\# DON'T allow system modification    
+# DON'T allow system modification    
 -allowedcmd "systemctl,chmod,chown,useradd"    
         
-\\\#\\\#	Docker Microservices Stack    
+##	Docker Microservices Stack    
     
-\\\# Service 1: API Gateway    
+# Service 1: API Gateway    
 cd /opt/services && gardirpull -r https://github.com/company/gateway.git -s -startcmd "docker-compose up -d gateway"    
     
-\\\# Service 2: Auth Service      
+# Service 2: Auth Service      
 gardirpull -r https://github.com/company/auth.git -s -startcmd "docker-compose up -d auth"    
     
-\\\# Service 3: Worker Service    
+# Service 3: Worker Service    
 gardirpull -r https://github.com/company/worker.git -s -startcmd "docker-compose up -d worker"    
     
-\\\# Pull static site and reload nginx    
+# Pull static site and reload nginx    
 cd /var/www/html && gardirpull -r https://github.com/company/website.git -b main -buildcmd "chown -R www-data:www-data . && systemctl reload nginx"    
     
-\\\#	Auto-Deploy Node.js Application    
-\\\# Add repository with auto-restart    
+#	Auto-Deploy Node.js Application    
+# Add repository with auto-restart    
     
-cd /var/www && gardirpull -r https://github.com/company/webapp.git -b production -s -startcmd "node server.js" -buildcmd "npm install && npm run build" -createfile text -filename .env -text "NODE\\\_ENV=production\\\\nPORT=4000"    
+cd /var/www && gardirpull -r https://github.com/company/webapp.git -b production -s -startcmd "node server.js" -buildcmd "npm install && npm run build" -createfile text -filename .env -text "NODE_ENV=production\nPORT=4000"    
       
-\\\#CI/CD Pipeline Integration    
+#CI/CD Pipeline Integration    
     
-\\\# Build and test on pull    
+# Build and test on pull    
 gardirpull -r https://github.com/company/app.git -buildcmd "make test && make build && systemctl restart app" -createfile text -filename .version -text "v1.0.0"
 ```
 
