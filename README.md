@@ -174,55 +174,55 @@ Gadirpull is a production-grade, versatile file synchronization and continuous d
 
 -r repo  Add repository 
 
-**-delete -r repo  Delete repository **
+-delete -r repo  Delete repository 
 
-**-list  List all tracked repositories **
+-list  List all tracked repositories 
 
-**-find repo  Find repository location **
+-find repo  Find repository location 
 
-**-d  Start daemon with dashboard **
+-d  Start daemon with dashboard 
 
-**-service  Create/remove systemd daemon service **
+-service  Create/remove systemd daemon service 
 
-**-auth \<type\>  Authentication type (none/token/password/ssh) **
+-auth \<type\>  Authentication type (none/token/password/ssh) 
 
-**-token \<value\>  Token or password **
+-token \<value\>  Token or password 
 
-**-user \<username\>  Username for HTTPS auth **
+-user \<username\>  Username for HTTPS auth 
 
-**-sshkey \<path\>  SSH private key path **
+-sshkey \<path\>  SSH private key path 
 
-**-buildcmd \<cmd\>  Build command after sync **
+-buildcmd \<cmd\>  Build command after sync 
 
-**-startcmd \<cmd\>  Service start command **
+-startcmd \<cmd\>  Service start command 
 
-**-s  Create systemd service for repository **
+-s  Create systemd service for repository 
 
-**-allowedcmd \<cmds\>  Comma-separated command whitelist **
+-allowedcmd \<cmds\>  Comma-separated command whitelist 
 
-**-disallowedcmd \<cmds\>  Comma-separated command blacklist **
+-disallowedcmd \<cmds\>  Comma-separated command blacklist 
 
-**-noexecpath Comma-separated directories to block executions in directories (e.g., 'public,uploads,doc'). Only applied when -allowedcmd or -disallowedcmd is set.**
+-noexecpath Comma-separated directories to block executions in directories (e.g., 'public,uploads,doc'). Only applied when -allowedcmd or -disallowedcmd is set.**
 
-**-memlimit \<limit\>     Memory limit for service (e.g., '512M', '1G', '2G'). Used with -s,-disallowedcmd,-allowedcmd flag.**
+-memlimit \<limit\>     Memory limit for service (e.g., '512M', '1G', '2G'). Used with -s,-disallowedcmd,-allowedcmd flag.**
 
-**-cpulimit    CPU quota percentage (e.g., -cpulimit 1, -cpulimit 1.5 cpu limit 2, the float value represent your limit to apllication from total cpu logical cores). Used with -s,-disallowedcmd,allowedcmd flag **
+-cpulimit    CPU quota percentage (e.g., -cpulimit 1, -cpulimit 1.5 cpu limit 2, the float value represent your limit to apllication from total cpu logical cores). Used with -s,-disallowedcmd,allowedcmd flag 
 
-**-envencrypt \<files\>  Encrypt files with systemd-creds -envunencrypt  Remove encrypted credentials -createfile text\\file  Create file in repository **
+-envencrypt \<files\>  Encrypt files with systemd-creds -envunencrypt  Remove encrypted credentials -createfile text\\file  Create file in repository 
 
-**-filename \<name\>  Destination filename -text "\<content\>"  Inline content for text mode -file \<path\>  Source file for file mode **
+-filename \<name\>  Destination filename -text "\<content\>"  Inline content for text mode -file \<path\>  Source file for file mode 
 
-**-c \<seconds\>  Pull interval (default 60) or webhook -c webhook -b \<branches\>  Comma-separated branches -host \<addr\>  Dashboard listen address -port \<port\>  Dashboard listen port**
+-c \<seconds\>  Pull interval (default 60) or webhook -c webhook -b \<branches\>  Comma-separated branches -host \<addr\>  Dashboard listen address -port \<port\>  Dashboard listen port**
 
 ### **Reverse Proxy Configuration**
 
-- **-proxy \<type\>  
+- -proxy \<type\>  
 Setup reverse proxy server. Supported(requires, apache,nginx,traefik,haproxy installed): nginx, apache, traefik, haproxy.  
 Examples:  
 gadirpull -r repo -proxy nginx  
 gadirpull -r repo -proxy apache**
 
-- **-proxydomain \<domain\>  
+- -proxydomain \<domain\>  
 Domain name configuration:  
 • example.com — Root domain mode (application or repo service or repo serve at http://example.com/)  
 • example.com# — Sub-path mode (application or repo service or repo serve at http://example.com/repo-name/)  
@@ -230,14 +230,14 @@ Domain name configuration:
 • "" — Same as catch-all mode  
 Default: # (catch-all mode)**
 
-- **-proxystaticpath \<path|indexes\>  
+- -proxystaticpath \<path|indexes\>  
 Serve static files instead of proxying to a backend service.  
 • "index.html,index.php" — Serve from repo root with specified index files  
 • /var/www/mysite — Serve from custom absolute path  
 Examples:  
 gadirpull -r repo url/file -proxystaticpath "index.html,index.htm,index.php"**
 
-- **-proxyssl \<mode\>  
+- -proxyssl \<mode\>  
 Enable SSL/TLS encryption(requires certbot installed if you want to auto generate your own ssl certificate):  
 • false — HTTP only (default)  
 • true — Manual SSL certificates (place in /etc/\{nginx,apache2\}/ssl/domain/)  
@@ -246,12 +246,12 @@ Examples:
 gadirpull -r repo -proxydomain example.com -proxyssl true  
 gadirpull -r repo -proxydomain example.com -proxyssl certbot**
 
-- **-proxycache  
+- -proxycache  
 Enable static asset caching (30 days) for images, CSS, JS, fonts, etc.  
 Cached extensions: .css, .js, .jpg, .png, .gif, .svg, .mp4, .pdf, .doc, .docx, .zip, .tar, and 30+ more.  
 Example: gadirpull -r repo -proxy nginx -proxycache**
 
-- **-manageProxy  
+- -manageProxy  
 Interactive wizard for proxy configuration management for exposing gadirpull-daemon or repository via a proxy(eg, for repo "gadirpull -r repo -manageproxy" then follow the wizard . for gadirpull daemon "gadirpull -manageproxy" then follow wizard)**
 
 - **Example: gadirpull -r repo -manageproxy- for repo **
@@ -543,7 +543,7 @@ gadirpull -r nfs://server.example.com/srv/nfs/share
 gadirpull -r nfs://server/share -user username -token password      
       
 # NFS with persistent mount (systemd)      
-# Will prompt: Choose \[1/2/3\] -\> select 2 for systemd persistent      
+# Will prompt: Choose  [1/2/3\]  select 2 for systemd persistent      
 gadirpull -r nfs://192.168.1.100/exports/data      
       
 # Basic SMB share (guest access)      
@@ -556,7 +556,7 @@ gadirpull -r smb://192.168.1.50/shared -user myuser -token mypassword
 gadirpull -r cifs://server/documents -user domain\\\\user -token pass123      
       
 # SMB with persistent mount via fstab      
-# Will prompt: Choose \[1/2/3\] -\> select 3 for fstab persistent      
+# Will prompt: Choose  [1/2/3\]  select 3 for fstab persistent      
 gadirpull -r smb://storage.local/files -user smbuser -token secret      
       
 # SMB with build command      
@@ -572,7 +572,7 @@ gadirpull -r sshfs://user@192.168.1.100/var/www -sshkey /home/user/.ssh/deploy\_
 gadirpull -r sshfs://deployer@example.com/opt/apps      
       
 # SSHFS with persistent systemd mount      
-# Will prompt: Choose \[1/2/3\] -\> select 2 for systemd persistent      
+# Will prompt: Choose  [1/2/3\]  select 2 for systemd persistent      
 gadirpull -r sshfs://git@github.com/user/repo.git -sshkey /root/.ssh/github\_key      
       
 # SSHFS with build and service      
