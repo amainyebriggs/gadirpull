@@ -54,7 +54,7 @@ Gadirpull is a production-grade, versatile file synchronization and continuous d
 
 ### Build & Deployment
 
-- Pre-commands (buildcmd) after successful sync (npm install, make install, composer install, etc.)
+- Pre-commands (buildcmd) after successful sync (npm install, make install, composer install, etc. or use gadirpull-tester as internal tester eg, -buildcmd "gadirpull-tester node" this runns internal test for your node application . eg 2 -buildcmd "gadirpull-tester go:build" for internal testing and build release)
 
 - Systemd service management (create, start, stop, restart)
 
@@ -192,7 +192,7 @@ Gadirpull is a production-grade, versatile file synchronization and continuous d
 
 -sshkey \<path\>  SSH private key path 
 
--buildcmd \<cmd\>  Build command after sync 
+-buildcmd \<cmd\>  Build command to execute after clone/update 
 
 -startcmd \<cmd\>  Service start command 
 
@@ -202,9 +202,9 @@ Gadirpull is a production-grade, versatile file synchronization and continuous d
 
 -disallowedcmd \<cmds\>  Comma-separated command blacklist 
 
--noexecpath Comma-separated directories to block executions in directories (e.g., 'public,uploads,doc'). Only applied when -allowedcmd or -disallowedcmd is set.**
+-noexecpath Comma-separated directories to block executions in directories (e.g., 'public,uploads,doc'). Only applied when -allowedcmd or -disallowedcmd is set. 
 
--memlimit \<limit\>     Memory limit for service (e.g., '512M', '1G', '2G'). Used with -s,-disallowedcmd,-allowedcmd flag.**
+-memlimit \<limit\>     Memory limit for service (e.g., '512M', '1G', '2G'). Used with -s,-disallowedcmd,-allowedcmd flag. 
 
 -cpulimit    CPU quota percentage (e.g., -cpulimit 1, -cpulimit 1.5 cpu limit 2, the float value represent your limit to apllication from total cpu logical cores). Used with -s,-disallowedcmd,allowedcmd flag 
 
@@ -212,7 +212,60 @@ Gadirpull is a production-grade, versatile file synchronization and continuous d
 
 -filename \<name\>  Destination filename -text "\<content\>"  Inline content for text mode -file \<path\>  Source file for file mode 
 
--c \<seconds\>  Pull interval (default 60) or webhook -c webhook -b \<branches\>  Comma-separated branches -host \<addr\>  Dashboard listen address -port \<port\>  Dashboard listen port**
+-c \<seconds\>  Pull interval (default 60) or webhook -c webhook -b \<branches\>  Comma-separated branches -host \<addr\>  Dashboard listen address -port \<port\>  Dashboard listen port 
+
+
+### **Internal Testing And Build**
+
+- -buildcmd "gadirpull-tester"  
+Internal test/build runner for gadirpull - Automatically detects and executes appropriate test/build commands for your programming language. 
+Supported languages:node, node-yarn, node-pnpm, python, python-uv, go, rust, java, java-gradle, php, ruby, dotnet, elixir, swift, kotlin, dart, flutter, c, cpp 
+Examples:  
+
+Add repository with tester as build command 
+gadirpull -r https://github.com/user/node-app.git -buildcmd "gadirpull-tester node" -startcmd "node server.js" -s 
+
+Update existing repository
+gadirpull -r /path/to/repo -buildcmd "gadirpull-tester node go" 
+
+Block dangerous commands only (disallowedcmd): 
+gadirpull -r https://github.com/user/app.git -buildcmd "gadirpull-tester node" -disallowedcmd "curl,wget,rm,chmod" 
+
+Strict whitelist (allowedcmd):
+gadirpull -r https://github.com/user/app.git -buildcmd "gadirpull-tester go" -allowedcmd "npm,node" 
+
+Add a Node.js app with testing, building, and security 
+gadirpull -r https://github.com/user/express-app.git -buildcmd "gadirpull-tester node:test node:build" -startcmd "node server.js" -allowedcmd "npm,node" -s -c webhook 
+
+Test with internal build using(:build) 
+gadirpull -r https://github.com/user/app.git -buildcmd "gadirpull-tester node:build" -startcmd "node server.js" -s 
+
+Test with internal build using(:build) multi test and build 
+
+gadirpull -r https://github.com/user/app.git -buildcmd "gadirpull-tester node:build go" -startcmd "node server.js" this will test and build for  node, test only for go  
+
+gadirpull -r https://github.com/user/app.git -buildcmd "gadirpull-tester node:build go:build" -startcmd "node server.js" this will test and build for node and go  
+
+
+Testing with custom command using(--) 
+
+gadirpull -r https://github.com/user/app.git -buildcmd "gadirpull-tester node --npm install @latest" -startcmd "node server.js" this will test  and run custom command if test succeeds  
+
+gadirpull -r https://github.com/user/app.git -buildcmd "gadirpull-tester node:build go:build --npm install @latest" -startcmd "node server.js" this will multi test and build, run custom command if test succeeds  
+
+
+Run builds regardless of test or  build fail failures 
+gadirpull-tester node:test node:build -- || true 
+
+Issue: test/build command fails with exit code 
+
+Solution: Check if build script exists in package.json,yarn.json,composer.json,etc. 
+{
+  "scripts": {
+  "    "test": "your-build-command",
+    "build": "your-build-command"
+  }
+} 
 
 ### **Reverse Proxy Configuration**
 
@@ -244,7 +297,7 @@ Enable SSL/TLS encryption(requires certbot installed if you want to auto generat
 • certbot — Auto-generate with Let's Encrypt (requires real domain)  
 Examples:  
 gadirpull -r repo -proxydomain example.com -proxyssl true  
-gadirpull -r repo -proxydomain example.com -proxyssl certbot**
+gadirpull -r repo -proxydomain example.com -proxyssl certbot 
 
 - -proxycache  
 Enable static asset caching (30 days) for images, CSS, JS, fonts, etc.  
