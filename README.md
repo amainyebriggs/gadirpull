@@ -2,7 +2,7 @@
 
 **Automated Repository Manager & Deployment Daemon**
 
-Gadirpull is a production-grade, versatile file synchronization and continuous deployment daemon for Linux systems. It monitors, syncs, and deploys content from multiple sources, including Git repositories, local directories, and network shares. The daemon continuously manages multiple repositories simultaneously and provides a real-time web dashboard and gardirpull cli for control. Gadirpull handles auto-deployment, keeps development environments in sync, and manages microservices across distributed infrastructure.
+Gadirpull is a production-grade, versatile file synchronization and continuous deployment daemon for Linux systems. It monitors, syncs, and deploys content from multiple sources, including Git repositories, local directories, and network shares. The daemon continuously manages multiple repositories simultaneously and provides a real-time web dashboard and gadirpull cli for control. Gadirpull handles auto-deployment, keeps development environments in sync, and manages microservices across distributed infrastructure.
 
 ## Features
 
@@ -395,19 +395,19 @@ Interactive wizard for proxy configuration management for exposing gadirpull-dae
 
 ```
 # Clone and build      
-git clone https://github.com/amainyebriggs/gardirpull.git      
-cd gardirpull      
-sudo chmod +x gardirpull      
+git clone https://github.com/amainyebriggs/gadirpull.git      
+cd gadirpull      
+sudo chmod +x gadirpull      
       
 # Or install directly      
-sudo cp gardirpull /usr/local/bin/  && rehash # Run gardirpull as system wide global command      
+sudo cp gadirpull /usr/local/bin/  && rehash # Run gadirpull as system wide global command      
       
-sudo ./gardirpull -d # Run gardirpull as a non system-wide global command      
+sudo ./gadirpull -d # Run gadirpull as a non system-wide global command      
       
 ##  First initialization      
       
-gardirpull --service # create the gardirpull as a service and start the gardirpull service on port :8445      
-#or create a git -r respository clone and gardirpull ask you if you want to run gardirpull as a service 
+gadirpull --service # create the gadirpull as a service and start the gadirpull service on port :8445      
+#or create a git -r respository clone and gadirpull ask you if you want to run gadirpull as a service 
 ```
 
 ![](dashboard.png "dashboard")
@@ -416,95 +416,95 @@ gardirpull --service # create the gardirpull as a service and start the gardirpu
 ##	Basic usage      
       
 # Add a repository with default settings (main branch, 60s interval)      
-gardirpull -r https://github.com/user/repo.git      
+gadirpull -r https://github.com/user/repo.git      
       
 # Add with specific branch      
-gardirpull -r https://github.com/user/repo.git -b develop      
+gadirpull -r https://github.com/user/repo.git -b develop      
       
 # Add with multiple branches      
-gardirpull -r https://github.com/user/repo.git -b main,develop,staging,feature-x      
+gadirpull -r https://github.com/user/repo.git -b main,develop,staging,feature-x      
       
 # Add with custom pull interval (120 seconds)      
-gardirpull -r https://github.com/user/repo.git -c 120      
+gadirpull -r https://github.com/user/repo.git -c 120      
       
 # Add repository in specific directory (run from that directory)      
-cd /var/www/ && gardirpull -r https://github.com/user/webapp.git      
+cd /var/www/ && gadirpull -r https://github.com/user/webapp.git      
       
 # Add multiple repositories in different folders      
 cd /home/user/projects      
-gardirpull -r https://github.com/user/backend.git      
+gadirpull -r https://github.com/user/backend.git      
       
-cd /var/services && gardirpull -r https://github.com/user/api-gateway.git      
+cd /var/services && gadirpull -r https://github.com/user/api-gateway.git      
       
 ##	Authentication Usage      
       
 # HTTPS with GitHub Personal Access Token      
-gardirpull -r https://github.com/user/private-repo.git -auth token -token ghp\_xxxxxxxxxxxx      
+gadirpull -r https://github.com/user/private-repo.git -auth token -token ghp\_xxxxxxxxxxxx      
       
 # HTTPS with username and password      
-gardirpull -r https://gitlab.com/user/repo.git -auth password -user myusername -token mypassword      
+gadirpull -r https://gitlab.com/user/repo.git -auth password -user myusername -token mypassword      
       
 # SSH with default key (~/.ssh/id\_rsa)      
-gardirpull -r git@github.com:user/repo.git      
+gadirpull -r git@github.com:user/repo.git      
       
 # SSH with custom private key      
-gardirpull -r git@github.com:user/repo.git -auth ssh -sshkey /home/user/.ssh/deploy-key      
+gadirpull -r git@github.com:user/repo.git -auth ssh -sshkey /home/user/.ssh/deploy-key      
       
 # SSH with custom key and specific branch      
-gardirpull -r git@github.com:user/repo.git -auth ssh -sshkey /etc/ssh/repo-key -b production      
+gadirpull -r git@github.com:user/repo.git -auth ssh -sshkey /etc/ssh/repo-key -b production      
       
 ##	Service Management      
       
 # Add repository with systemd service (auto-start on boot, auto-restart on failure)      
-gardirpull -r https://github.com/user/node-app.git -s -startcmd "node server.js"      
+gadirpull -r https://github.com/user/node-app.git -s -startcmd "node server.js"      
       
 # Add with service and custom interval      
-gardirpull -r https://github.com/user/python-app.git -s -startcmd "python app.py" -c 30      
+gadirpull -r https://github.com/user/python-app.git -s -startcmd "python app.py" -c 30      
       
 # Add Go service with build step      
-gardirpull -r https://github.com/user/golang-api.git -s -startcmd "./api-server" -buildcmd "go build -o api-server"      
+gadirpull -r https://github.com/user/golang-api.git -s -startcmd "./api-server" -buildcmd "go build -o api-server"      
       
 # Add Docker service      
-gardirpull -r https://github.com/user/docker-app.git -s -startcmd "docker-compose up -d"      
+gadirpull -r https://github.com/user/docker-app.git -s -startcmd "docker-compose up -d"      
       
 # Add systemd service for a specific branch      
-gardirpull -r https://github.com/user/app.git -b production -s -startcmd "/usr/bin/myapp --prod"      
+gadirpull -r https://github.com/user/app.git -b production -s -startcmd "/usr/bin/myapp --prod"      
       
 # Update existing repo to add service      
-gardirpull -r https://github.com/user/app.git -s -startcmd "node server.js"      
+gadirpull -r https://github.com/user/app.git -s -startcmd "node server.js"      
       
       
 ##	File Creation      
       
 # Run build command after pull      
-gardirpull -r https://github.com/user/app.git -buildcmd "make build"      
+gadirpull -r https://github.com/user/app.git -buildcmd "make build"      
       
 # Run multiple commands      
-gardirpull -r https://github.com/user/app.git -buildcmd "npm install && npm run build"      
+gadirpull -r https://github.com/user/app.git -buildcmd "npm install && npm run build"      
       
 # Run with service restart      
-gardirpull -r https://github.com/user/app.git -buildcmd "systemctl restart myapp"      
+gadirpull -r https://github.com/user/app.git -buildcmd "systemctl restart myapp"      
       
 # Run database migrations after pull      
-gardirpull -r https://github.com/user/app.git -buildcmd "python manage.py migrate"      
+gadirpull -r https://github.com/user/app.git -buildcmd "python manage.py migrate"      
       
 # Run tests after update (optional, can fail without stopping)      
-gardirpull -r https://github.com/user/app.git -buildcmd "go test ./... || true"      
+gadirpull -r https://github.com/user/app.git -buildcmd "go test ./... || true"      
       
 # Combine pre-startcmd with service management      
-gardirpull -r https://github.com/user/webapp.git -s -startcmd "gunicorn app:app" -buildcmd "pip install -r requirements.txt"      
+gadirpull -r https://github.com/user/webapp.git -s -startcmd "gunicorn app:app" -buildcmd "pip install -r requirements.txt"      
       
       
 ##	Repository Management      
       
 # Delete a repository (removes files and service)      
-gardirpull -r https://github.com/user/repo.git -delete      
+gadirpull -r https://github.com/user/repo.git -delete      
       
 # List all respository      
       
-gardirpull -list # List all respository      
+gadirpull -list # List all respository      
       
-gardirpull -find https://github.com/user/repo.git #find a respository      
+gadirpull -find https://github.com/user/repo.git #find a respository      
       
       
 # Network share  and file      
@@ -651,49 +651,49 @@ gadirpull -r ftp://backup.server.com/archives
 gadirpull -r ftp://assets.server.com/static -buildcmd "make && make install"
 ```
 
-![](Screenshot_20260403_223815.png "gardirpull")
+![](Screenshot_20260403_223815.png "gadirpull")
 
 ```
       
-##	Daemon Management- Daemon can be used if Gardirpull is not running as a systemd service       
+##	Daemon Management- Daemon can be used if gadirpull is not running as a systemd service       
       
 # Start daemon in foreground (for testing)      
-sudo gardirpull -d      
+sudo gadirpull -d      
       
 # Start daemon on specific network interface (local only - default)      
-sudo gardirpull -d -host 127.0.0.1      
+sudo gadirpull -d -host 127.0.0.1      
       
 # Start daemon accessible from network (all interfaces)      
-sudo gardirpull -d -host 0.0.0.0      
+sudo gadirpull -d -host 0.0.0.0      
       
 # Start daemon with custom folders config      
-sudo gardirpull -d -f /etc/myconfig/folders.txt      
+sudo gadirpull -d -f /etc/myconfig/folders.txt      
       
 # Enable webhook API endpoint for the daemon and gadirpull must be started with a webhook daemon before a webhook repository can be added       
-sudo gardirpull -d -webhook      
+sudo gadirpull -d -webhook      
       
 # Create systemd service (interactive)      
-sudo gardirpull -service      
+sudo gadirpull -service      
       
 # Remove systemd service and config (interactive)      
-sudo gardirpull -service      
+sudo gadirpull -service      
       
 # Check service status      
-sudo systemctl status gardirpull-daemon      
+sudo systemctl status gadirpull-daemon      
       
 # Restart daemon      
-sudo systemctl restart gardirpull-daemon      
+sudo systemctl restart gadirpull-daemon      
       
 # View gadirpull daemon service logs      
-sudo journalctl -u gardirpull-daemon -f      
+sudo journalctl -u gadirpull-daemon -f      
       
 # Stop daemon      
-sudo systemctl stop gardirpull-daemon      
+sudo systemctl stop gadirpull-daemon      
       
 ## Security-Command restriction##      
          
-sudo gardirpull -r https://github.com/company/auth.git -s -startcmd "node server" -buildcmd "npm install && mkdir foldername" -allowedcmd "node,npm,mkdir" ## this only expose the service to the allowed commands      
-sudo gardirpull -r https://github.com/company/auth.git -s -startcmd "node server" -buildcmd "npm install && mkdir foldername" -envencrypt "myfile.env,myfile.txt,myfile1.cert" ## encrypt files and only decrypt during runtome and send to memory then make it available via memory path to the os.env($CREDENTIALS\_DIRECTORY/yourfilename). This approach combines hardware locking, file system isolation, and memory protection      
+sudo gadirpull -r https://github.com/company/auth.git -s -startcmd "node server" -buildcmd "npm install && mkdir foldername" -allowedcmd "node,npm,mkdir" ## this only expose the service to the allowed commands      
+sudo gadirpull -r https://github.com/company/auth.git -s -startcmd "node server" -buildcmd "npm install && mkdir foldername" -envencrypt "myfile.env,myfile.txt,myfile1.cert" ## encrypt files and only decrypt during runtome and send to memory then make it available via memory path to the os.env($CREDENTIALS\_DIRECTORY/yourfilename). This approach combines hardware locking, file system isolation, and memory protection      
       
     # DON'T allow dangerous wildcards      
 -allowedcmd "\*"                    # Defeats the purpose      
@@ -707,25 +707,25 @@ sudo gardirpull -r https://github.com/company/auth.git -s -startcmd "node server
 ##	Docker Microservices Stack      
       
 # Service 1: API Gateway      
-cd /opt/services && gardirpull -r https://github.com/company/gateway.git -s -startcmd "docker-compose up -d gateway"      
+cd /opt/services && gadirpull -r https://github.com/company/gateway.git -s -startcmd "docker-compose up -d gateway"      
       
 # Service 2: Auth Service        
-gardirpull -r https://github.com/company/auth.git -s -startcmd "docker-compose up -d auth"      
+gadirpull -r https://github.com/company/auth.git -s -startcmd "docker-compose up -d auth"      
       
 # Service 3: Worker Service      
-gardirpull -r https://github.com/company/worker.git -s -startcmd "docker-compose up -d worker"      
+gadirpull -r https://github.com/company/worker.git -s -startcmd "docker-compose up -d worker"      
       
 # Pull static site and reload nginx      
-cd /var/www/html && gardirpull -r https://github.com/company/website.git -b main -buildcmd "chown -R www-data:www-data . && systemctl reload nginx"      
+cd /var/www/html && gadirpull -r https://github.com/company/website.git -b main -buildcmd "chown -R www-data:www-data . && systemctl reload nginx"      
       
 #	Auto-Deploy Node.js Application      
 # Add repository with auto-restart      
       
-cd /var/www && gardirpull -r https://github.com/company/webapp.git -b production -s -startcmd "node server.js" -buildcmd "npm install && npm run build" -createfile text -filename .env -text "NODE\_ENV=production\\nPORT=4000"      
+cd /var/www && gadirpull -r https://github.com/company/webapp.git -b production -s -startcmd "node server.js" -buildcmd "npm install && npm run build" -createfile text -filename .env -text "NODE\_ENV=production\\nPORT=4000"      
         
 #CI/CD Pipeline Integration      
       
 # Build and test on pull      
-gardirpull -r https://github.com/company/app.git -buildcmd "make test && make build && systemctl restart app" -createfile text -filename .version -text "v1.0.0"
+gadirpull -r https://github.com/company/app.git -buildcmd "make test && make build && systemctl restart app" -createfile text -filename .version -text "v1.0.0"
 ```
 
