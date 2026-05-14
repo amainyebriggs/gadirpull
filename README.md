@@ -394,13 +394,20 @@ Interactive wizard for proxy configuration management for exposing gadirpull-dae
 ### Installation
 
 ```
-# Clone and build      
-git clone https://github.com/amainyebriggs/gadirpull.git      
-cd gadirpull      
-sudo chmod +x gadirpull      
+# download and install      
+curl https://github.com/amainyebriggs/gadirpull/releases/download/$version/gadirpull_linux_amd64 -replace version with gadirpull version tag
+     
+sudo chmod +x gadirpull_linux_amd64  
+mv gadirpull_linux_amd64 gadirpull
       
-# Or install directly      
-sudo cp gadirpull /usr/local/bin/  && rehash # Run gadirpull as system wide global command      
+# Or install directly(global)      
+
+curl https://github.com/amainyebriggs/gadirpull/releases/download/$version/gadirpull_linux_amd64 -replace version with gadirpull version tag
+     
+sudo chmod +x gadirpull_linux_amd64  
+mv gadirpull_linux_amd64 gadirpull
+
+sudo cp gadirpull /usr/local/bin/  && rehash/hash-r # Run gadirpull as system wide global command      
       
 sudo ./gadirpull -d # Run gadirpull as a non system-wide global command      
       
