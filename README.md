@@ -7,23 +7,30 @@ Gadirpull is a production-grade, versatile file synchronization and continuous d
 ### Installation
 
 ```
-# download and install      
-curl https://github.com/amainyebriggs/gadirpull/releases/download/$version/gadirpull_linux_amd64 -replace version with gadirpull version tag
-     
-sudo chmod +x gadirpull_linux_amd64  
-mv gadirpull_linux_amd64 gadirpull
+## download and install      
+## Curl  
+curl -LO https://github.com/amainyebriggs/gadirpull/releases/download/v1.2/gadirpull_linux_amd64 && sudo chmod +x gadirpull_linux_amd64 -replace version with gadirpull version tag
+
+sudo mv gadirpull_linux_amd64 gadirpull
       
 # Or install directly(global)      
 
-curl https://github.com/amainyebriggs/gadirpull/releases/download/$version/gadirpull_linux_amd64 -replace version with gadirpull version tag
-     
-sudo chmod +x gadirpull_linux_amd64  
-mv gadirpull_linux_amd64 gadirpull
+curl -LO https://github.com/amainyebriggs/gadirpull/releases/download/$Verion/gadirpull_linux_amd64 && sudo chmod +x gadirpull_linux_amd64  -replace version with gadirpull version tag
 
 sudo cp gadirpull /usr/local/bin/  && rehash/hash-r # Run gadirpull as system wide global command      
+
       
 sudo ./gadirpull -d # Run gadirpull as a non system-wide global command      
       
+      
+## Wget  
+wget -O gadirpull https://github.com/amainyebriggs/gadirpull/releases/download/$Version/gadirpull_linux_amd64 && sudo chmod +x gadirpull_linux_amd64 -replace version with gadirpull version tag
+
+sudo cp gadirpull /usr/local/bin/  && rehash/hash-r # Run gadirpull as system wide global command  
+
+./gadirpull -d # Run gadirpull as a non system-wide global command      
+    
+
 ##  First initialization      
       
 gadirpull --service # create the gadirpull as a service and start the gadirpull service on port :8445      
