@@ -7,15 +7,15 @@ Gadirpull is a production-grade, versatile file synchronization and continuous d
 ### Installation
 
 
-## download and install     
+#### download and install     
 
-## Curl  
+#### Curl  
 ```
 curl -LO https://github.com/amainyebriggs/gadirpull/releases/download/v1.2/gadirpull_linux_amd64 && sudo chmod +x gadirpull_linux_amd64 -replace version with gadirpull version tag
 
 sudo mv gadirpull_linux_amd64 gadirpull
 ```      
-# Or install directly(global)      
+#### Or install directly(global)      
 ```
 curl -LO https://github.com/amainyebriggs/gadirpull/releases/download/$Verion/gadirpull_linux_amd64 && sudo chmod +x gadirpull_linux_amd64  -replace version with gadirpull version tag
 
@@ -25,7 +25,7 @@ sudo cp gadirpull /usr/local/bin/  && rehash/hash-r # Run gadirpull as system wi
 sudo ./gadirpull -d # Run gadirpull as a non system-wide global command      
 ```      
       
-## Wget 
+#### Wget 
 ```
 wget -O gadirpull https://github.com/amainyebriggs/gadirpull/releases/download/$Version/gadirpull_linux_amd64 && sudo chmod +x gadirpull_linux_amd64 -replace version with gadirpull version tag
 
@@ -34,7 +34,7 @@ sudo cp gadirpull /usr/local/bin/  && rehash/hash-r # Run gadirpull as system wi
 ./gadirpull -d # Run gadirpull as a non system-wide global command      
 ```    
 
-##  First initialization      
+####  First initialization      
   ```    
 gadirpull --service # create the gadirpull as a service and start the gadirpull service on port :8445      
 #or create a git -r respository clone and gadirpull ask you if you want to run gadirpull as a service 
@@ -249,7 +249,10 @@ gadirpull --service # create the gadirpull as a service and start the gadirpull 
 
 -filename \<name\>  Destination filename -text "\<content\>"  Inline content for text mode -file \<path\>  Source file for file mode 
 
--c \<seconds\>  Pull interval (default 60) or webhook -c webhook -b \<branches\>  Comma-separated branches -host \<addr\>  Dashboard listen address -port \<port\>  Dashboard listen port 
+-c \<seconds\>  Pull interval (default 60) or webhook -c webhook 
+-b \<branches\>  Comma-separated branches 
+-host \<addr\>  Gadirpull daemon listen address 
+-port \<port\>  Gadirpull daemon listen port 
 
 
 ### **Internal Testing And Build**
@@ -310,7 +313,7 @@ Solution: Check if build script exists in package.json,yarn.json,composer.json,e
 Setup reverse proxy server. Supported(requires, apache,nginx,traefik,haproxy installed): nginx, apache, traefik, haproxy.  
 Examples:  
 gadirpull -r repo -proxy nginx  
-gadirpull -r repo -proxy apache**
+gadirpull -r repo -proxy apache  
 
 - -proxydomain \<domain\>  
 Domain name configuration:  
@@ -318,14 +321,14 @@ Domain name configuration:
 • example.com# — Sub-path mode (application or repo service or repo serve at http://example.com/repo-name/)  
 • # — Catch-all mode (application or repo service or repo serve at http://YOUR\_IP/repo-name/ — recommended for multiple apps)  
 • "" — Same as catch-all mode  
-Default: # (catch-all mode)**
+Default: # (catch-all mode)  
 
 - -proxystaticpath \<path|indexes\>  
 Serve static files instead of proxying to a backend service.  
 • "index.html,index.php" — Serve from repo root with specified index files  
 • /var/www/mysite — Serve from custom absolute path  
 Examples:  
-gadirpull -r repo url/file -proxystaticpath "index.html,index.htm,index.php"**
+gadirpull -r repo url/file -proxystaticpath "index.html,index.htm,index.php"  
 
 - -proxyssl \<mode\>  
 Enable SSL/TLS encryption(requires certbot installed if you want to auto generate your own ssl certificate):  
@@ -339,14 +342,14 @@ gadirpull -r repo -proxydomain example.com -proxyssl certbot 
 - -proxycache  
 Enable static asset caching (30 days) for images, CSS, JS, fonts, etc.  
 Cached extensions: .css, .js, .jpg, .png, .gif, .svg, .mp4, .pdf, .doc, .docx, .zip, .tar, and 30+ more.  
-Example: gadirpull -r repo -proxy nginx -proxycache**
+Example: gadirpull -r repo -proxy nginx -proxycache  
 
 - -manageProxy  
 Interactive wizard for proxy configuration management for exposing gadirpull-daemon or repository via a proxy(eg, for repo "gadirpull -r repo -manageproxy" then follow the wizard . for gadirpull daemon "gadirpull -manageproxy" then follow wizard)**
 
-- **Example: gadirpull -r repo -manageproxy- for repo **
+- -Example: gadirpull -r repo -manageproxy- for repo   
 
-- **Example: gadirpull -manageproxy- for gadirpull daemon**
+- -Example: gadirpull -manageproxy- for gadirpull daemon  
 
 ### File Operations
 
@@ -681,10 +684,14 @@ sudo gadirpull -d
       
 # Start daemon on specific network interface (local only - default)      
 sudo gadirpull -d -host 127.0.0.1      
-      
+     
+     
 # Start daemon accessible from network (all interfaces)      
 sudo gadirpull -d -host 0.0.0.0      
-      
+    
+# Start daemon on specific port(Default:8445)      
+sudo gadirpull -d -host 127.0.0.1  -port 3008
+
 # Start daemon with custom folders config      
 sudo gadirpull -d -f /etc/myconfig/folders.txt      
       
