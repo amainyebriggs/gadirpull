@@ -4,6 +4,33 @@
 
 Gadirpull is a production-grade, versatile file synchronization and continuous deployment daemon for Linux systems. It monitors, syncs, and deploys content from multiple sources, including Git repositories, local directories, and network shares. The daemon continuously manages multiple repositories simultaneously and provides a real-time web dashboard and gadirpull cli for control. Gadirpull handles auto-deployment, keeps development environments in sync, and manages microservices across distributed infrastructure.
 
+### Installation
+
+```
+# download and install      
+curl https://github.com/amainyebriggs/gadirpull/releases/download/$version/gadirpull_linux_amd64 -replace version with gadirpull version tag
+     
+sudo chmod +x gadirpull_linux_amd64  
+mv gadirpull_linux_amd64 gadirpull
+      
+# Or install directly(global)      
+
+curl https://github.com/amainyebriggs/gadirpull/releases/download/$version/gadirpull_linux_amd64 -replace version with gadirpull version tag
+     
+sudo chmod +x gadirpull_linux_amd64  
+mv gadirpull_linux_amd64 gadirpull
+
+sudo cp gadirpull /usr/local/bin/  && rehash/hash-r # Run gadirpull as system wide global command      
+      
+sudo ./gadirpull -d # Run gadirpull as a non system-wide global command      
+      
+##  First initialization      
+      
+gadirpull --service # create the gadirpull as a service and start the gadirpull service on port :8445      
+#or create a git -r respository clone and gadirpull ask you if you want to run gadirpull as a service 
+```
+
+
 ## Features
 
 ### Multi-Source Synchronization
@@ -391,31 +418,6 @@ Interactive wizard for proxy configuration management for exposing gadirpull-dae
 
 - Cross-Platform - runs on any Linux system
 
-### Installation
-
-```
-# download and install      
-curl https://github.com/amainyebriggs/gadirpull/releases/download/$version/gadirpull_linux_amd64 -replace version with gadirpull version tag
-     
-sudo chmod +x gadirpull_linux_amd64  
-mv gadirpull_linux_amd64 gadirpull
-      
-# Or install directly(global)      
-
-curl https://github.com/amainyebriggs/gadirpull/releases/download/$version/gadirpull_linux_amd64 -replace version with gadirpull version tag
-     
-sudo chmod +x gadirpull_linux_amd64  
-mv gadirpull_linux_amd64 gadirpull
-
-sudo cp gadirpull /usr/local/bin/  && rehash/hash-r # Run gadirpull as system wide global command      
-      
-sudo ./gadirpull -d # Run gadirpull as a non system-wide global command      
-      
-##  First initialization      
-      
-gadirpull --service # create the gadirpull as a service and start the gadirpull service on port :8445      
-#or create a git -r respository clone and gadirpull ask you if you want to run gadirpull as a service 
-```
 
 ![](dashboard.png "dashboard")
 
